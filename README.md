@@ -1,32 +1,45 @@
-## Meal Mile
+# Meal Mile: Application Features
 
-1.Personalizovani Profili
-   Opis: Korisnici kreiraju profile sa svojim preferencijama, alergijama i uobičajenim listama za kupovinu.
-   Cilj: Omogućavanje personalizovanog iskustva prilikom pretrage i poručivanja namirnica.
-2. Integracija sa Lokalnim Supermarketima
-   Opis: Aplikacija se integriše sa lokalnim supermarketima za prikaz trenutnih zaliha i cijena.
-   Cilj: Olakšavanje poručivanja i dostave namirnica direktno iz lokalnih prodavnica.
-3. Automatska Generacija Lista
-   Opis: Na osnovu prethodnih kupovina i preferencija, aplikacija automatski generiše predloge lista za kupovinu.
-   Cilj: Ušteda vremena i olakšavanje planiranja kupovine.
-4. Checklist za Putovanje
-   Opis: Mogućnost kreiranja personalizovanih checklista za putovanje sa kategorijama kao što su odjeća, lična higijena, tehnologija, itd.
-   Cilj: Pomoć korisnicima u organizaciji i pakovanju za putovanje bez zaboravljanja važnih stvari.
-5. Podsetnici i Notifikacije
-   Opis: Aplikacija šalje podsetnike za kupovinu i pripremu za putovanje na osnovu korisnikovog kalendara.
-   Cilj: Osiguravanje da korisnici imaju sve potrebno na vreme.
-6. Dijeljenje Lista
-   Opis: Mogućnost dijeljenja lista za kupovinu i checklist-a za putovanje sa porodicom ili prijateljima.
-   Cilj: Olakšavanje koordinacije kupovine i pakovanja za grupna putovanja.
-7. Integracija sa Receptima
-   Opis: Aplikacija nudi recepte na osnovu namirnica koje korisnici imaju kod kuće ili planiraju da kupe.
-   Cilj: Inspiracija za kuhanje i smanjenje otpada hrane.
-8. Analiza Potrošnje
-   Opis: Prikazivanje statistike o potrošnji i saveti za uštedu na osnovu istorije kupovine.
-   Cilj: Pomoć korisnicima da bolje upravljaju svojim budžetom.
-9. Podrška za Više Jezika i Valuta
-   Opis: Aplikacija podržava više jezika i valuta za međunarodne korisnike.
-   Cilj: Povećanje dostupnosti i korisnosti aplikacije na globalnom nivou.
-10. Virtuelni Asistent
-    Opis: Integracija virtuelnog asistenta za pomoć u kreiranju lista, pronalaženju recepata i odgovaranju na česta pitanja.
-    Cilj: Poboljšanje korisničkog iskustva kroz interaktivnu podršku.
+### 1. Team/Family Profiles
+- **Description**: Profiles are linked to a specific team or family, allowing all members to view and interact with the same list.
+- **Objective**: To utilize a multi-tenant approach to ensure all family members can see and manage the same list.
+
+### 2. Personalized Profiles
+- **Description**: Users create profiles with their preferences, allergies, and usual shopping lists.
+- **Objective**: To enable a personalized experience during the search and ordering of groceries.
+
+### 3. Integration with Local Supermarkets
+- **Description**: The application integrates with local supermarkets to display current stock and prices.
+- **Objective**: To facilitate the ordering and delivery of groceries directly from local stores.
+
+### 4. Automatic List Generation
+- **Description**: Based on previous purchases and preferences, the application automatically generates shopping list suggestions.
+- **Objective**: To save time and facilitate shopping planning.
+
+### 5. Travel Checklist
+- **Description**: The ability to create personalized travel checklists with categories such as clothing, personal hygiene, technology, etc.
+- **Objective**: To assist users in organizing and packing for travel without forgetting important items.
+
+### 6. Reminders and Notifications
+- **Description**: The application sends reminders for shopping and travel preparation based on the user's calendar.
+- **Objective**: To ensure that users have everything they need on time.
+
+### 7. Sharing Lists
+- **Description**: The ability to share shopping lists and travel checklists with family or friends.
+- **Objective**: To facilitate the coordination of shopping and packing for group trips.
+
+### 8. Integration with Recipes
+- **Description**: The application offers recipes based on the groceries that users have at home or plan to buy.
+- **Objective**: To inspire cooking and reduce food waste.
+
+### 9. Spending Analysis
+- **Description**: Displaying spending statistics and saving tips based on purchase history.
+- **Objective**: To help users better manage their budget.
+
+### 10. Support for Multiple Languages and Currencies
+- **Description**: The application supports multiple languages and currencies for international users.
+- **Objective**: To increase availability and usefulness of the application on a global level.
+
+### 11. Virtual Assistant
+- **Description**: Integration of a virtual assistant to help in creating lists, finding recipes, and answering frequent questions.
+- **Objective**: To improve user experience through interactive support.
