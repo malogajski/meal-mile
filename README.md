@@ -1,6 +1,6 @@
 # Meal Mile: Application Features
 
-### 1. Team/Family Profiles
+### 1. Team/Family Profiles (v.1 simple tenant; v.2 complex tenant with multiple databases)
 - **Description**: Profiles are linked to a specific team or family, allowing all members to view and interact with the same list.
 - **Objective**: To utilize a multi-tenant approach to ensure all family members can see and manage the same list.
 
@@ -8,7 +8,7 @@
 - **Description**: Users create profiles with their preferences, allergies, and usual shopping lists.
 - **Objective**: To enable a personalized experience during the search and ordering of groceries.
 
-### 3. Integration with Local Supermarkets
+### 3. Integration with Local Supermarkets (implement later)
 - **Description**: The application integrates with local supermarkets to display current stock and prices.
 - **Objective**: To facilitate the ordering and delivery of groceries directly from local stores.
 

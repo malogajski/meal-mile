@@ -19,6 +19,21 @@ Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
+
+Route::group(['middleware' => ['auth', 'verified']], function () {
+    // Items
+    Route::get('items', App\Livewire\Item\Index::class)
+        ->name('items');
+
+    // Shopping
+    Route::get('shopping-list', App\Livewire\ShoppingList\Index::class)
+        ->name('shopping-list');
+    Route::get('shopping-list/create', App\Livewire\ShoppingList\Create::class)
+        ->name('shopping-list-create');
+    Route::get('shopping-list/{id}/items', App\Livewire\ShoppingListItem\Create::class)
+        ->name('shopping-list-items');
+});
+
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
