@@ -35,6 +35,16 @@ class Index extends Component
         $shoppingListItem->delete($id);
     }
 
+    public function cancel($id)
+    {
+        ShoppingListItem::where('shopping_list_id', $this->shoppingListId)
+            ->where('item_id', $id)
+            ->update([
+                'is_purchased'         => 0,
+                'purchased_by_user_id' => null,
+            ]);
+    }
+
     public function purchased($id)
     {
         $shoppingListItem = ShoppingListItem::where('shopping_list_id', $this->shoppingListId)

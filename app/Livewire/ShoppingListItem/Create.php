@@ -48,6 +48,6 @@ class Create extends Component
 
     public function resetList()
     {
-        ShoppingListItem::where('shopping_list_id', $this->shopping_list_id)->delete();
+//        ShoppingListItem::where('shopping_list_id', $this->shopping_list_id)->delete();
     }
 }
