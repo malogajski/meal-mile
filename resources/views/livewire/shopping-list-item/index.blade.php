@@ -3,7 +3,7 @@
     <ul class="flex flex-col space-y-2">
         @forelse($shoppingItems as $row)
 
-            <li class="@if($row->is_purchased) bg-green-800 @else bg-gray-700 @endif p-2 text-white flex items-center justify-between">
+            <li class="@if($row->is_purchased) bg-green-800 @else dark:bg-gray-700 dark:text-white text-gray-700 bg-gray-200 @endif p-2 flex items-center justify-between">
                 <span>{{ $row->item->name }}</span>
 
                 @if($row->is_purchased)

@@ -5,7 +5,7 @@
             @php
                 $isInList = \App\Models\ShoppingListItem::where('shopping_list_id', $shopping_list_id)->where('item_id', $item->id)->exists();
             @endphp
-            <span class="p-2 rounded @if($isInList) bg-gray-400 @else bg-lime-700 cursor-pointer @endif mx-1 my-1" wire:key="{{ $item->id }}" @if(!$isInList) wire:click="add({{$item->id}})"@endif>{{ $item->name }}</span>
+            <span class="p-2 rounded @if($isInList) bg-gray-400 @else bg-lime-700 text-white cursor-pointer @endif mx-1 my-1" wire:key="{{ $item->id }}" @if(!$isInList) wire:click="add({{$item->id}})"@endif>{{ $item->name }}</span>
         @endforeach
     </div>
 

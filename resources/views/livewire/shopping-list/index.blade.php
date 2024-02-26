@@ -4,7 +4,7 @@
         <x-primary-button wire:click="newShoppingList">New Shopping List</x-primary-button>
     </div>
 
-    <ul class="flex items-center flex-wrap space-x-5">
+    <ul class="flex flex-wrap items-start space-x-5">
         @forelse($shoppingLists as $shoppingList)
             <li>
                 <x-secondary-button wire:click="goToItems({{$shoppingList->id}})">{{ $shoppingList->name }}</x-secondary-button>
