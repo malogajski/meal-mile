@@ -15,12 +15,14 @@ class Create extends Component
     public $price = 1;
     public $shopping_list_id;
     public $team_id;
+    public ShoppingList $shoppingList;
 
     public function mount($id)
     {
         $this->added_by_user_id = auth()->user()->id;
         $this->team_id = auth()->user()->team_id;
         $this->shopping_list_id = $id;
+        $this->shoppingList = ShoppingList::find($id);
     }
 
     public function render()
@@ -38,9 +40,14 @@ class Create extends Component
         $this->dispatch('refreshShippingList');
     }
 
-    public function remove($id)
+    public function remove($itemId)
     {
-        ShoppingListItem::destroy($id);
+        ShoppingListItem::where('shopping_list_id', $this->shopping_list_id)->where('item_id', $itemId)->delete();
         $this->dispatch('refreshShippingList');
+    }
+
+    public function resetList()
+    {
+        ShoppingListItem::where('shopping_list_id', $this->shopping_list_id)->delete();
     }
 }
