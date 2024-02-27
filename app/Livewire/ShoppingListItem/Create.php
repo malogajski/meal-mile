@@ -36,7 +36,13 @@ class Create extends Component
     public function add($itemId)
     {
         $this->item_id = $itemId;
-        ShoppingListItem::insert($this->all());
+        $data = $this->all();
+
+        if (isset($data['shoppingList'])) {
+            unset($data['shoppingList']);
+        }
+
+        ShoppingListItem::insert($data);
         $this->dispatch('refreshShippingList');
     }
 

@@ -20,6 +20,7 @@ class ShoppingListItem extends Model
         'quantity',
         'price',
         'total_price',
+        'created_at',
     ];
 
     public function shoppingList(): \Illuminate\Database\Eloquent\Relations\BelongsTo
