@@ -31,7 +31,7 @@
             <img src="{{ asset('base/logo-150.svg') }}" alt="">
         </div>
 
-        <div class="mt-16">
+        <div class="mt-16 dark:text-gray-300">
             <h1 class="text-center text-3xl font-semibold">Welcome to Meal Mile</h1>
             <p class="text-center mt-4">Your ultimate tool for efficient shopping and travel planning. Manage your shopping lists and travel checklists in one place, and get suggestions for recipes based on your pantry items!</p>
 
