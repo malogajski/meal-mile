@@ -27,7 +27,7 @@ class Create extends Component
 
     public function render()
     {
-        $items = Item::paginate(10);
+        $items = Item::all();
 
         return view('livewire.shopping-list-item.create', compact('items'))
             ->layout('layouts.app');
