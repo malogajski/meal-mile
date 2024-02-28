@@ -14,10 +14,22 @@ class Item extends Model
         'team_id',
         'user_id',
         'name',
+        'category_id',
+        'sub_category_id',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function subCategory(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(SubCategory::class);
     }
 }

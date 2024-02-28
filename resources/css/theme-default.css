@@ -1,0 +1,15 @@
+.select {
+    @apply rounded text-gray-700 dark:bg-gray-700 dark:text-gray-300
+}
+
+.modal {
+    @apply p-6 bg-white text-gray-700 dark:bg-gray-800 dark:text-gray-300
+}
+
+.text-input {
+    @apply rounded bg-gray-50 text-gray-700 dark:bg-gray-800 dark:text-gray-300
+}
+
+#modal-container {
+    @apply align-middle !important;
+}

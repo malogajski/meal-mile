@@ -31,5 +31,6 @@
         {{ $slot }}
     </main>
 </div>
+@livewire('livewire-ui-modal')
 </body>
 </html>
