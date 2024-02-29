@@ -20,8 +20,12 @@ class Index extends Component
 
     public function render()
     {
-        $shoppingItems = ShoppingListItem::with('item', 'addedByUser')->where('shopping_list_id', $this->shoppingListId)
+        $shoppingItems = ShoppingListItem::with('item.category', 'item.subCategory', 'addedByUser')
+            ->where('shopping_list_id', $this->shoppingListId)
+            ->orderBy('id', 'desc')
+            ->orderBy('is_purchased')
             ->get();
+//        dd($shoppingItems->toArray());
 
         return view('livewire.shopping-list-item.index', compact('shoppingItems'))
             ->layout('layouts.app');

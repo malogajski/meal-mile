@@ -3,7 +3,13 @@
         @forelse($shoppingItems as $row)
 
             <li class="transition duration-200 ease-in-out transform @if($row->is_purchased) dark:bg-green-800 bg-green-200 @else dark:bg-gray-700 dark:text-white text-gray-700 bg-gray-200 @endif p-2 flex items-center justify-between rounded-lg shadow">
-                <span>{{ $row->item->name }}</span>
+                <div>
+                    <p>{{ $row->item->name }}</p>
+                    <p class="text-sm text-gray-500">
+                        {{ !empty($row->item->category) ? $row->item->category->name : '' }}
+                        {{ !empty($row->item->subCategory) ? ' | ' . $row->item->subCategory->name : '' }}
+                    </p>
+                </div>
 
                 @if($row->is_purchased)
                     <div class="flex space-x-6">
