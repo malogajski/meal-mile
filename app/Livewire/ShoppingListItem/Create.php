@@ -17,6 +17,15 @@ class Create extends Component
     public $team_id;
     public ShoppingList $shoppingList;
 
+    protected $listeners = [
+        'refreshShoppingItemCreate' => 'check',
+    ];
+
+    public function check()
+    {
+        $this->dispatch('$refresh');
+    }
+
     public function mount($id)
     {
         $this->added_by_user_id = auth()->user()->id;
@@ -27,15 +36,23 @@ class Create extends Component
 
     public function render()
     {
-        $items = Item::all()->sortBy('name');
+        $alreadyAddedItems = ShoppingListItem::where('shopping_list_id', $this->shopping_list_id)->pluck('item_id')->toArray();
+        $query = Item::select(['id', 'name']);
+
+        if (!empty($alreadyAddedItems)) {
+            $query->whereNotIn('id', $alreadyAddedItems);
+        }
+
+        $items = $query->orderBy('name')
+            ->get();
 
         return view('livewire.shopping-list-item.create', compact('items'))
             ->layout('layouts.app');
     }
 
-    public function add($itemId)
+    public function add($item)
     {
-        $this->item_id = $itemId;
+        $this->item_id = $item['id'];
         $data = $this->all();
 
         if (isset($data['shoppingList'])) {

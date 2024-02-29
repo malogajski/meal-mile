@@ -2,7 +2,7 @@
     <ul class="flex flex-col space-y-2 h-full overflow-y-auto">
         @forelse($shoppingItems as $row)
 
-            <li class="transition duration-200 ease-in-out transform hover:scale-105 @if($row->is_purchased) dark:bg-green-800 bg-green-200 @else dark:bg-gray-700 dark:text-white text-gray-700 bg-gray-200 @endif p-2 flex items-center justify-between rounded-lg shadow">
+            <li class="transition duration-200 ease-in-out transform @if($row->is_purchased) dark:bg-green-800 bg-green-200 @else dark:bg-gray-700 dark:text-white text-gray-700 bg-gray-200 @endif p-2 flex items-center justify-between rounded-lg shadow">
                 <span>{{ $row->item->name }}</span>
 
                 @if($row->is_purchased)

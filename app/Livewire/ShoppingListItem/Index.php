@@ -33,6 +33,7 @@ class Index extends Component
             ->where('item_id', $id)->first();
 
         $shoppingListItem->delete($id);
+        $this->dispatch('refreshShoppingItemCreate');
     }
 
     public function cancel($id)
