@@ -48,6 +48,10 @@ class Create extends Component
             unset($data['shoppingList']);
         }
 
+        if (isset($data['shoppingListId'])) {
+            unset($data['shoppingListId']);
+        }
+
         if (!empty($this->shoppingListId)) {
             ShoppingList::where('id', $this->shoppingListId)->update($data);
         } else {

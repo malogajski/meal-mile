@@ -1,5 +1,5 @@
 <div class="m-6 p-6 bg-white dark:bg-gray-800 dark:text-gray-300 rounded-xl">
-    <p class="text-lg font-semibold mb-6">New Shopping list</p>
+    <p class="text-lg font-semibold mb-6">@if(!empty($shoppingListId)) Edit @else New @endif Shopping list</p>
 
     <div class="mb-4 flex flex-col">
         <label for="name">Name</label>
