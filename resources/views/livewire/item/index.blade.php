@@ -1,4 +1,4 @@
-<div class="m-6 p-6 bg-white dark:bg-gray-800 dark:text-gray-300 rounded-xl">
+<div class="md:m-6 md:p-6 bg-white dark:bg-gray-800 dark:text-gray-300 md:rounded-xl">
     <div class="flex items-center justify-between mb-6">
         <p class="text-xl font-semibold mb-6">List of Items</p>
         <x-primary-button wire:click="$dispatch('openModal', {component: 'item.create'})" class="my-2">
@@ -28,7 +28,7 @@
             @forelse($items as $item)
                 <tr class="odd:bg-gray-50 dark:odd:bg-gray-600">
                     <td class="px-2 py-2 text-center">{{ $item->id }}</td>
-                    <td class="text-left">
+                    <td class="text-left w-full">
                         <p>{{ $item->name }}</p>
                         <p class="text-xs text-gray-500 block md:hidden">{{ $item->category->name ?? '' }}</p>
                         <p class="text-xs text-gray-500 block md:hidden">{{ $item->subCategory->name ?? '' }}</p>
