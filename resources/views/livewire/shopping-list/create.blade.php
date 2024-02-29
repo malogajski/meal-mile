@@ -34,7 +34,7 @@
     </div>
 
     <div class="mt-6 flex items-center space-x-5">
-        <x-secondary-button wire:click="back">Back</x-secondary-button>
+        <x-secondary-button wire:click="back" wire:click="back">Back</x-secondary-button>
         <x-primary-button wire:click="save">Save</x-primary-button>
     </div>
 

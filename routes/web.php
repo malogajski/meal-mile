@@ -30,6 +30,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         ->name('shopping-list');
     Route::get('shopping-list/create', App\Livewire\ShoppingList\Create::class)
         ->name('shopping-list-create');
+    Route::get('shopping-list/{id}/edit', App\Livewire\ShoppingList\Create::class)
+        ->name('shopping-list-edit');
     Route::get('shopping-list/{id}/items', App\Livewire\ShoppingListItem\Create::class)
         ->name('shopping-list-items');
 });
