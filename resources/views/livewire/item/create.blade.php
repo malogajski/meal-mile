@@ -8,6 +8,7 @@
                 <div>
                     <span>Item name:</span>
                     <input type="text" class="text-input rounded" wire:model="name">
+                    <div>@error('name') {{ $message }} @enderror</div>
                 </div>
 
                 <div class="flex flex-col space-y-2 rounded p-2 bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300">
@@ -23,6 +24,7 @@
 
                         <x-secondary-button wire:click="$dispatch('openModal', {component: 'category.create'})">Add</x-secondary-button>
                     </div>
+                    <div>@error('categoryId') {{ $message }} @enderror</div>
                 </div>
 
                 <div class="flex flex-col space-y-2 rounded p-2 bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300">
@@ -37,6 +39,7 @@
 
                         <x-secondary-button wire:click="$dispatch('openModal', {component: 'sub-category.create', parameters: {categoryId: '{{$categoryId}}' }})">Add</x-secondary-button>
                     </div>
+                    <div>@error('subCategoryId') {{ $message }} @enderror</div>
                 </div>
             </div>
 

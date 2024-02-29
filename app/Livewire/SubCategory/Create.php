@@ -23,19 +23,19 @@ class Create extends ModalComponent
     {
         $requestData = $request->all();
 
-        // Ako želite direktno da pristupite određenom delu
+        // access to calls
         $calls = $requestData['components'][0]['calls'];
 
         $parameters = [];
         foreach ($calls as $call) {
             if (isset($call['params'][1]['parameters'])) {
                 $parameters = $call['params'][1]['parameters'];
-                // Sada imate 'parameters' kao array
-                break; // Prekidamo loop ako smo našli šta smo tražili
+                // Now we get parameters
+                break;
             }
         }
 
-        // Obrada 'parameters'
+        // parsing 'parameters'
         if (!empty($parameters)) {
             foreach ($parameters as $key => $value) {
                 if ($key === 'categoryId') {
