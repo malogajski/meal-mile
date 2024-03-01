@@ -43,22 +43,23 @@
                 </div>
             </div>
 
-{{--            <div x-data="{ photoPreview: null }">--}}
-{{--                <input type="file" wire:model="pathToFile" id="imgInp" @change="photoPreview = $event.target.files.length > 0 ? URL.createObjectURL($event.target.files[0]) : null">--}}
+            <div x-data="{ photoPreview: null, imgUrl: @entangle('pathToFile') }">
+                <input type="file" wire:model="pathToFile" id="imgInp" @change="photoPreview = $event.target.files.length > 0 ? URL.createObjectURL($event.target.files[0]) : null">
+
+                <template x-if="photoPreview">
+                    <img x-bind:src="photoPreview" x-model="imgUrl" style="width: 200px; height: 200px;" alt="Image preview...">
+                </template>
+                <p>Path: {{ $pathToFile ?? 'n-a' }}</p>
+            </div>
+
+{{--            <div x-data="{ photoPreview: null, fileChosen(event) { $wire.upload('pathToFile', event.target.files[0]); } }">--}}
+{{--                <input type="file" id="imgInp" @change="fileChosen">--}}
 
 {{--                <template x-if="photoPreview">--}}
 {{--                    <img x-bind:src="photoPreview" style="width: 200px; height: 200px;" alt="Image preview...">--}}
 {{--                </template>--}}
 {{--                <p>Path: {{ $pathToFile ?? 'n-a' }}</p>--}}
 {{--            </div>--}}
-
-            <div x-data>
-                <input type="file" id="imgInp" x-ref="file" x-on:change="$wire.upload('pathToFile', $refs.file.files[0])">
-
-                <template x-if="$refs.file.files.length > 0">
-                    <img x-bind:src="URL.createObjectURL($refs.file.files[0])" style="width: 200px; height: 200px;" alt="Image preview">
-                </template>
-            </div>
 
             <div class="flex items-center justify-between mt-6">
                 <x-secondary-button wire:click="$dispatch('closeModal')">Close</x-secondary-button>
