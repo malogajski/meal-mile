@@ -43,11 +43,13 @@
                 </div>
             </div>
 
-            <div x-data="{ photoPreview: null, imgUrl: @entangle('pathToFile') }">
-                <input type="file" wire:model="pathToFile" id="imgInp" @change="photoPreview = $event.target.files.length > 0 ? URL.createObjectURL($event.target.files[0]) : null">
+            <div x-data="{ photoPreview: null }">
+                <input type="file" wire:model="pathToFile"
+                       accept="image/png,image/jpeg,image/gif"
+                       id="imgInp" @change="photoPreview = $event.target.files.length > 0 ? URL.createObjectURL($event.target.files[0]) : null">
 
                 <template x-if="photoPreview">
-                    <img x-bind:src="photoPreview" x-model="imgUrl" style="width: 200px; height: 200px;" alt="Image preview...">
+                    <img x-bind:src="photoPreview" style="width: 200px; height: 200px;" alt="Image preview...">
                 </template>
                 <p>Path: {{ $pathToFile ?? 'n-a' }}</p>
             </div>
