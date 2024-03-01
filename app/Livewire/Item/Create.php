@@ -79,8 +79,9 @@ class Create extends ModalComponent
         return view('livewire.item.create');
     }
 
-    public function save()
+    public function save(Request $request)
     {
+        dd($request->all());
         $data = [
             'team_id'     => auth()->user()->team_id,
             'name'        => $this->name,
@@ -121,8 +122,8 @@ class Create extends ModalComponent
             $item->addMedia($this->pathToFile)
                 ->toMediaCollection('items');
         }
-        $this->dispatch('refreshCreateItem');
-        $this->closeModal();
+//        $this->dispatch('refreshCreateItem');
+//        $this->closeModal();
     }
 
     public function updatedCategoryId()

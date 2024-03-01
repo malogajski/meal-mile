@@ -43,9 +43,10 @@
                 </div>
             </div>
 
-            <div x-data="{ photoPreview: null }">
+            <div x-data="{ photoPreview: null, photoUrl: @entangle('pathToFile') }">
                 <input type="file" wire:model="pathToFile"
                        accept="image/png,image/jpeg,image/gif"
+                       capture="camera"
                        id="imgInp" @change="photoPreview = $event.target.files.length > 0 ? URL.createObjectURL($event.target.files[0]) : null">
 
                 <template x-if="photoPreview">
@@ -91,6 +92,7 @@
         init() {
             this.$watch('photoPreview', value => {
                 if (value) {
+                    photoUrl = value;
                     // here we can add something like this.$wire.call('save');
                 }
             });
