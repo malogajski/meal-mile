@@ -1,4 +1,4 @@
-<div class="md:m-6 md:p-6 bg-white dark:bg-gray-800 dark:text-gray-300 md:rounded-xl">
+<div class="md:m-6 m-2 p-2 md:p-6 bg-white dark:bg-gray-800 dark:text-gray-300 md:rounded-xl">
     <div class="flex items-center justify-between mb-6">
         <p class="text-xl font-semibold mb-6">List of Items</p>
         <x-primary-button wire:click="$dispatch('openModal', {component: 'item.create'})" class="my-2">
