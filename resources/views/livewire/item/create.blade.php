@@ -73,5 +73,17 @@
             reader.readAsDataURL(file);
         }
     });
+
+    Alpine.data('photoPreviewFeature', () => ({
+        photoPreview: null,
+
+        init() {
+            this.$watch('photoPreview', value => {
+                if (value) {
+                    // here we can add something like this.$wire.call('save');
+                }
+            });
+        }
+    }))
 </script>
 @endscript
