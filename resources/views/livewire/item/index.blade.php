@@ -19,7 +19,7 @@
                 <th class="p-2">#</th>
                 <th class="w-24">Image</th>
                 <th>Name</th>
-                <th>Category</th>
+                <th class="hidden md:table-cell">Category</th>
                 <th class="hidden md:table-cell">Sub category</th>
                 <th class="hidden md:table-cell">Added by</th>
                 <th class="w-24"></th>
@@ -34,7 +34,7 @@
                             <img class="rounded-xl shadow" src="{{$item->media[0]['preview_url']}}" alt="img_{{ $item->name }}">
                         @endif
                     </td>
-                    <td class="text-left flex-grow p-1">
+                    <td class="text-left max-w-full p-1">
                         <p>{{ $item->name }}</p>
                         <p class="text-xs text-gray-500 block md:hidden">{{ $item->category->name ?? '' }}</p>
                         <p class="text-xs text-gray-500 block md:hidden">{{ $item->subCategory->name ?? '' }}</p>
