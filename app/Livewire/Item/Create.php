@@ -26,6 +26,7 @@ class Create extends ModalComponent
     protected $listeners = [
         'refreshCreateItem',
         'fileSelected',
+        'fileUpload'
     ];
 
     public function fileSelected($file)
