@@ -17,6 +17,7 @@
             <thead>
             <tr class="bg-gray-200 dark:bg-gray-900">
                 <th class="p-2">#</th>
+                <th class="w-24">Image</th>
                 <th>Name</th>
                 <th>Category</th>
                 <th class="hidden md:table-cell">Sub category</th>
@@ -26,9 +27,14 @@
             </thead>
             <tbody>
             @forelse($items as $item)
-                <tr class="odd:bg-gray-50 dark:odd:bg-gray-600">
+                <tr class="odd:bg-gray-50 dark:odd:bg-gray-600 p-1">
                     <td class="px-2 py-2 text-center">{{ $item->id }}</td>
-                    <td class="text-left w-full">
+                    <td class="w-24 p-1">
+                        @if(isset($item->media[0]))
+                            <img class="rounded-xl shadow" src="{{$item->media[0]['preview_url']}}" alt="img_{{ $item->name }}">
+                        @endif
+                    </td>
+                    <td class="text-left flex-grow p-1">
                         <p>{{ $item->name }}</p>
                         <p class="text-xs text-gray-500 block md:hidden">{{ $item->category->name ?? '' }}</p>
                         <p class="text-xs text-gray-500 block md:hidden">{{ $item->subCategory->name ?? '' }}</p>

@@ -8,16 +8,20 @@ use App\Models\Item;
 use App\Models\SubCategory;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Livewire\WithFileUploads;
 use LivewireUI\Modal\ModalComponent;
+
 
 class Create extends ModalComponent
 {
+    use WithFileUploads;
     public $name;
     public $lists = [];
     public $categoryId;
     public $subCategoryId;
     public Item $item;
     public $itemId;
+    public $pathToFile = '';
 
     protected $listeners = [
         'refreshCreateItem',
@@ -92,16 +96,26 @@ class Create extends ModalComponent
             ->exists();
 
         if ($this->itemId) {
-            Item::find($this->itemId)->update([
+            $item = Item::find($this->itemId);
+            $item->update([
                 'name'            => $this->name,
                 'category_id'     => $this->categoryId,
                 'sub_category_id' => $this->subCategoryId,
             ]);
+
+            if (!empty($this->pathToFile)) {
+                $item->addMedia($this->pathToFile)
+                    ->toMediaCollection('items');
+            }
             $this->dispatch('refreshCreateItem');
             $this->closeModal();
         } else {
             if (!$isItemExists) {
-                Item::create($data);
+                $item = Item::create($data);
+
+                $item->addMedia($this->pathToFile)
+                    ->toMediaCollection('items');
+
                 $this->dispatch('refreshCreateItem');
                 $this->closeModal();
             }

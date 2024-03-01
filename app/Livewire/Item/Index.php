@@ -29,6 +29,7 @@ class Index extends Component
             $query->whereRaw('lower(name) like ? ', '%' . $this->search . '%');
         }
         $query->orderBy('id', 'desc');
+//        dd($query->get()->toArray());
         $items = $query->paginate(10);
 
         return view('livewire.item.index', compact('items'))->layout('layouts.app');

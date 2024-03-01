@@ -5,10 +5,15 @@ namespace App\Models;
 use App\Traits\Tenantable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Queue\InteractsWithQueue;
+use Spatie\Image\Manipulations;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Item extends Model
+class Item extends Model implements HasMedia
 {
-    use HasFactory, Tenantable;
+    use HasFactory, Tenantable, InteractsWithMedia;
 
     protected $fillable = [
         'team_id',
@@ -16,6 +21,10 @@ class Item extends Model
         'name',
         'category_id',
         'sub_category_id',
+    ];
+
+    protected $appends = [
+        'image'
     ];
 
     public function user()
@@ -31,5 +40,19 @@ class Item extends Model
     public function subCategory(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(SubCategory::class);
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this
+            ->addMediaConversion('preview')
+            ->fit(Manipulations::FIT_CROP, 300, 300)
+            ->nonQueued();
+    }
+
+    public function getImageAttribute()
+    {
+//        return $this->getMedia('items');
+        return $this->getFirstMediaUrl();
     }
 }

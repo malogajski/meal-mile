@@ -43,6 +43,10 @@
                 </div>
             </div>
 
+            <div class="my-2">
+                <input type="file" wire:model="pathToFile">
+            </div>
+
             <div class="flex items-center justify-between mt-6">
                 <x-secondary-button wire:click="$dispatch('closeModal')">Close</x-secondary-button>
                 <x-primary-button wire:click="save">Save</x-primary-button>
