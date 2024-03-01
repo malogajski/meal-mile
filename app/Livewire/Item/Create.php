@@ -123,8 +123,8 @@ class Create extends ModalComponent
             $item->addMedia($this->pathToFile)
                 ->toMediaCollection('items');
         }
-//        $this->dispatch('refreshCreateItem');
-//        $this->closeModal();
+        $this->dispatch('refreshCreateItem');
+        $this->closeModal();
     }
 
     public function updatedCategoryId()
