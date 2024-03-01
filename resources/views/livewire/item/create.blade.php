@@ -43,10 +43,12 @@
                 </div>
             </div>
 
-            <div class="my-2">
-                <input type="file" wire:model="pathToFile">
-                <p>Path: {{ $pathToFile ?? '' }}</p>
-                <img src="{{ $pathToFile }}" alt="temp_img">
+            <div x-data="{ photoPreview: null }">
+                <input type="file" wire:model="pathToFile" id="imgInp" @change="photoPreview = $event.target.files.length > 0 ? URL.createObjectURL($event.target.files[0]) : null">
+
+                <template x-if="photoPreview">
+                    <img x-bind:src="photoPreview" style="width: 200px; height: 200px;" alt="Image preview...">
+                </template>
             </div>
 
             <div class="flex items-center justify-between mt-6">
@@ -57,34 +59,18 @@
     </div>
 </div>
 
-{{--@script--}}
-
-{{--<script>--}}
-{{--    const input = document.querySelector('input[type="file"]');--}}
-{{--    console.log('Script loaded'); // Provera da li je skript učitan--}}
-
-{{--    input.addEventListener('change', async function (e) {--}}
-{{--        const file = e.target.files[0];--}}
-{{--        if (file && file.type.includes('heic')) {--}}
-{{--            console.log('Attempting to convert HEIC file'); // For testing only--}}
-
-{{--            try {--}}
-{{--                const conversionResult = await heic2any({--}}
-{{--                    blob: file,--}}
-{{--                    toType: "image/jpeg",--}}
-{{--                    quality: 0.8--}}
-{{--                });--}}
-
-{{--                let newFile = new File([conversionResult], 'converted-image.jpeg', {type: 'image/jpeg'});--}}
-{{--                const dataTransfer = new DataTransfer();--}}
-{{--                dataTransfer.items.add(newFile);--}}
-{{--                input.files = dataTransfer.files;--}}
-
-{{--            } catch (error) {--}}
-{{--                console.error('Error converting file:', error);--}}
-{{--            }--}}
-{{--        }--}}
-{{--    });--}}
-{{--</script>--}}
-
-{{--@endscript--}}
+@script
+<script>
+    Livewire.on('fileChosen', () => {
+        let inputField = document.getElementById('imgInp');
+        let file = inputField.files[0];
+        if (file) {
+            let reader = new FileReader();
+            reader.onloadend = () => {
+                // additional action here
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+@endscript

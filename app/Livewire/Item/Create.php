@@ -25,7 +25,13 @@ class Create extends ModalComponent
 
     protected $listeners = [
         'refreshCreateItem',
+        'fileSelected',
     ];
+
+    public function fileSelected($file)
+    {
+        $this->pathToFile = $file;
+    }
 
     public function refreshCreateItem()
     {
