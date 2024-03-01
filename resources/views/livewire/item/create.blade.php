@@ -45,6 +45,8 @@
 
             <div class="my-2">
                 <input type="file" wire:model="pathToFile">
+                <p>Path: {{ $pathToFile ?? '' }}</p>
+                <img src="{{ $pathToFile }}" alt="temp_img">
             </div>
 
             <div class="flex items-center justify-between mt-6">
@@ -54,6 +56,7 @@
         </div>
     </div>
 </div>
+
 {{--@script--}}
 
 {{--<script>--}}
