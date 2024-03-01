@@ -81,7 +81,7 @@ class Create extends ModalComponent
 
     public function save(Request $request)
     {
-        dd($request->all());
+//        dd($request->all());
         $data = [
             'team_id'     => auth()->user()->team_id,
             'name'        => $this->name,
