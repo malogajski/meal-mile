@@ -95,31 +95,28 @@ class Create extends ModalComponent
             ->where('name', $this->name)
             ->exists();
 
+        $item = Item::find($this->itemId);
+
         if ($this->itemId) {
-            $item = Item::find($this->itemId);
             $item->update([
                 'name'            => $this->name,
                 'category_id'     => $this->categoryId,
                 'sub_category_id' => $this->subCategoryId,
             ]);
 
-            if (!empty($this->pathToFile)) {
-                $item->addMedia($this->pathToFile)
-                    ->toMediaCollection('items');
-            }
-            $this->dispatch('refreshCreateItem');
-            $this->closeModal();
+
         } else {
             if (!$isItemExists) {
                 $item = Item::create($data);
-
-                $item->addMedia($this->pathToFile)
-                    ->toMediaCollection('items');
-
-                $this->dispatch('refreshCreateItem');
-                $this->closeModal();
             }
         }
+
+        if (!empty($this->pathToFile)) {
+            $item->addMedia($this->pathToFile)
+                ->toMediaCollection('items');
+        }
+        $this->dispatch('refreshCreateItem');
+        $this->closeModal();
     }
 
     public function updatedCategoryId()

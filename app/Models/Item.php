@@ -47,6 +47,7 @@ class Item extends Model implements HasMedia
         $this
             ->addMediaConversion('preview')
             ->fit(Manipulations::FIT_CROP, 300, 300)
+            ->format(Manipulations::FORMAT_JPG)
             ->nonQueued();
     }
 

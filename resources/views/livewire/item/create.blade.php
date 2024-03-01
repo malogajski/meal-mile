@@ -52,7 +52,36 @@
                 <x-primary-button wire:click="save">Save</x-primary-button>
             </div>
         </div>
-
-
     </div>
 </div>
+{{--@script--}}
+
+{{--<script>--}}
+{{--    const input = document.querySelector('input[type="file"]');--}}
+{{--    console.log('Script loaded'); // Provera da li je skript učitan--}}
+
+{{--    input.addEventListener('change', async function (e) {--}}
+{{--        const file = e.target.files[0];--}}
+{{--        if (file && file.type.includes('heic')) {--}}
+{{--            console.log('Attempting to convert HEIC file'); // For testing only--}}
+
+{{--            try {--}}
+{{--                const conversionResult = await heic2any({--}}
+{{--                    blob: file,--}}
+{{--                    toType: "image/jpeg",--}}
+{{--                    quality: 0.8--}}
+{{--                });--}}
+
+{{--                let newFile = new File([conversionResult], 'converted-image.jpeg', {type: 'image/jpeg'});--}}
+{{--                const dataTransfer = new DataTransfer();--}}
+{{--                dataTransfer.items.add(newFile);--}}
+{{--                input.files = dataTransfer.files;--}}
+
+{{--            } catch (error) {--}}
+{{--                console.error('Error converting file:', error);--}}
+{{--            }--}}
+{{--        }--}}
+{{--    });--}}
+{{--</script>--}}
+
+{{--@endscript--}}
