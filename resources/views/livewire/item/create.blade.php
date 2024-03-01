@@ -49,6 +49,7 @@
                 <template x-if="photoPreview">
                     <img x-bind:src="photoPreview" style="width: 200px; height: 200px;" alt="Image preview...">
                 </template>
+                <p>Path: {{ $pathToFile ?? 'n-a' }}</p>
             </div>
 
             <div class="flex items-center justify-between mt-6">
