@@ -50,8 +50,8 @@
             <div x-data="{ photoPreview: null, photoUrl: @entangle('pathToFile') }">
                 <input type="file"
                        wire:model="pathToFile"
-{{--                       accept="image/"--}}
-                       capture="camera"
+                       accept="image/"
+{{--                       capture="camera"--}}
                        id="capture" @change="photoPreview = $event.target.files.length > 0 ? URL.createObjectURL($event.target.files[0]) : null">
 
                 <template x-if="photoPreview">
