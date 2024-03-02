@@ -50,25 +50,14 @@
             <div x-data="{ photoPreview: null, photoUrl: @entangle('pathToFile') }">
                 <input type="file"
                        wire:model="pathToFile"
-                       accept="image/"
+{{--                       accept="image/"--}}
                        capture="camera"
                        id="capture" @change="photoPreview = $event.target.files.length > 0 ? URL.createObjectURL($event.target.files[0]) : null">
 
                 <template x-if="photoPreview">
                     <img x-bind:src="photoPreview" style="width: 200px; height: 200px;" alt="Image preview...">
                 </template>
-                <p>Path: <span class="text-red-800">{{ $pathToFile ?? 'n-a' }}</span></p>
-                <input type="text" hidden id="img" alt="from phone" wire:model.live="pathToFile">
             </div>
-
-            {{--            <div x-data="{ photoPreview: null, fileChosen(event) { $wire.upload('pathToFile', event.target.files[0]); } }">--}}
-            {{--                <input type="file" id="imgInp" @change="fileChosen">--}}
-
-            {{--                <template x-if="photoPreview">--}}
-            {{--                    <img x-bind:src="photoPreview" style="width: 200px; height: 200px;" alt="Image preview...">--}}
-            {{--                </template>--}}
-            {{--                <p>Path: {{ $pathToFile ?? 'n-a' }}</p>--}}
-            {{--            </div>--}}
 
             <div class="flex items-center justify-between mt-6">
                 <x-secondary-button wire:click="$dispatch('closeModal')">Close</x-secondary-button>
