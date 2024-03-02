@@ -50,4 +50,10 @@ class Item extends Model implements HasMedia
             ->format(Manipulations::FORMAT_JPG)
             ->nonQueued();
     }
+
+    public function getImageAttribute()
+    {
+//        return $this->getMedia('items');
+        return $this->getFirstMediaUrl();
+    }
 }
