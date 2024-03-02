@@ -42,14 +42,12 @@ class Index extends Component
         $this->dispatch('$refresh');
     }
 
-    public function edit($id)
-    {
-        return redirect()->route('item.edit', $id);
-
+//    public function edit($id)
+//    {
 //        $this->dispatch('open-modal', [
 //            'component' => 'item.create',
 //            'parameters' => [
 //                'id' => $id
 //            ]]);
-    }
+//    }
 }
