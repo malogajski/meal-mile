@@ -8,11 +8,12 @@ use App\Models\Item;
 use App\Models\SubCategory;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Livewire\Component;
 use Livewire\WithFileUploads;
 use LivewireUI\Modal\ModalComponent;
 
 
-class Create extends ModalComponent
+class Create extends Component
 {
     use WithFileUploads;
     public $name;
@@ -124,7 +125,7 @@ class Create extends ModalComponent
                 ->toMediaCollection('items');
         }
         $this->dispatch('refreshCreateItem');
-        $this->closeModal();
+//        $this->closeModal();
     }
 
     public function updatedCategoryId()

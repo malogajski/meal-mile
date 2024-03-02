@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Item;
 use App\Models\SubCategory;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Livewire\Component;
 
 class Index extends Component
@@ -43,10 +44,12 @@ class Index extends Component
 
     public function edit($id)
     {
-        $this->dispatch('open-modal', [
-            'component' => 'item.create',
-            'parameters' => [
-                'id' => $id
-            ]]);
+        return redirect()->route('item.edit', $id);
+
+//        $this->dispatch('open-modal', [
+//            'component' => 'item.create',
+//            'parameters' => [
+//                'id' => $id
+//            ]]);
     }
 }

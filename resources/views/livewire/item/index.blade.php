@@ -49,7 +49,8 @@
                     <td class="text-center hidden md:table-cell">{{ $item->user->name }}</td>
                     <td>
                         <div class="flex space-x-2 mx-1">
-                            <x-secondary-button wire:click="$dispatch('openModal', {component: 'item.create', parameters: {id: '{{$item->id}}'}})"><i class="fa fa-edit"></i></x-secondary-button>
+{{--                            <x-secondary-button wire:click="$dispatch('openModal', {component: 'item.create', parameters: {id: '{{$item->id}}'}})"><i class="fa fa-edit"></i></x-secondary-button>--}}
+                            <x-secondary-button wire:click="edit({{$item->id}})"><i class="fa fa-edit"></i></x-secondary-button>
                             <x-danger-button wire:confirm="Are you sure?" wire:click="delete({{$item->id}})"><i class="fa fa-trash-alt"></i></x-danger-button>
                         </div>
                     </td>
