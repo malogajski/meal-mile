@@ -109,6 +109,12 @@ $logout = function (Logout $logout) {
             <x-responsive-nav-link :href="route('items')" :active="request()->routeIs('items')" wire:navigate>
                 {{ __('Items') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('categories')" :active="request()->routeIs('categories')" wire:navigate>
+                {{ __('Categories') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('sub-categories')" :active="request()->routeIs('sub-categories')" wire:navigate>
+                {{ __('Sub-Categories') }}
+            </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('shopping-list')" :active="request()->routeIs('shopping-list')" wire:navigate>
                 {{ __('Shopping List') }}
             </x-responsive-nav-link>
