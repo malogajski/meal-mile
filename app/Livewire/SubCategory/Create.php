@@ -18,6 +18,8 @@ class Create extends ModalComponent
 //    public $lists = [];
     public $categoryId;
     public Category $category;
+    public $subCategoryId;
+    public SubCategory $subCategory;
 
     public function mount(Request $request, $categoryId = null)
     {

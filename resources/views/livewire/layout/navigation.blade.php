@@ -36,6 +36,18 @@ $logout = function (Logout $logout) {
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('categories')" :active="request()->routeIs('categories')" wire:navigate>
+                        {{ __('Categories') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('sub-categories')" :active="request()->routeIs('sub-categories')" wire:navigate>
+                        {{ __('Sub-Categories') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('shopping-list')" :active="request()->routeIs('shopping-list.index')" wire:navigate>
                         {{ __('Shopping list') }}
                     </x-nav-link>

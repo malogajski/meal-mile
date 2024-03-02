@@ -47,15 +47,21 @@
                 </div>
             </div>
 
-            <div x-data="{ photoPreview: null, photoUrl: @entangle('pathToFile') }">
+            <div x-data="{ photoPreview: null }">
+                <label for="file-input" class="sr-only">Choose file</label>
                 <input type="file"
+                       name="file-input"
+                       class="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
+                        file:bg-gray-50 file:border-0
+                        file:me-4
+                        file:py-3 file:px-4
+                        dark:file:bg-gray-700 dark:file:text-gray-400"
                        wire:model="pathToFile"
                        accept="image/"
-{{--                       capture="camera"--}}
                        id="capture" @change="photoPreview = $event.target.files.length > 0 ? URL.createObjectURL($event.target.files[0]) : null">
 
                 <template x-if="photoPreview">
-                    <img x-bind:src="photoPreview" style="width: 200px; height: 200px;" alt="Image preview...">
+                    <img x-bind:src="photoPreview" class="object-contain h-48 w-96" alt="Image preview...">
                 </template>
             </div>
 
