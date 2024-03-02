@@ -82,7 +82,6 @@ class Create extends ModalComponent
 
     public function save(Request $request)
     {
-//        dd($request->all());
         $data = [
             'team_id'     => auth()->user()->team_id,
             'name'        => $this->name,
@@ -120,6 +119,8 @@ class Create extends ModalComponent
         }
 
         if (!empty($this->pathToFile)) {
+            $item->clearMediaCollection('items');
+
             $item->addMedia($this->pathToFile)
                 ->toMediaCollection('items');
         }
