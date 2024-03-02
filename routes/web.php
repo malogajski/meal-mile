@@ -28,7 +28,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('categories', \App\Livewire\Category\Index::class)->name('categories');
 
     // Sub-Category
-    Route::get('sub-categories', \App\Livewire\Subcategory\Index::class)->name('sub-categories');
+    Route::get('sub-categories', \App\Livewire\SubCategory\Index::class)->name('sub-categories');
 
     // Shopping
     Route::get('shopping-list', App\Livewire\ShoppingList\Index::class)
