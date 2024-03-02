@@ -30,10 +30,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     // Sub-Category
     Route::get('sub-categories', \App\Livewire\Subcategory\Index::class)->name('sub-categories');
 
-//    Route::get('item/create', [\App\Http\Controllers\ItemController::class, 'create'])->name('item.create');
-//    Route::get('item/{id}/edit', [\App\Http\Controllers\ItemController::class, 'edit'])->name('item.edit');
-//    Route::post('item/store', [\App\Http\Controllers\ItemController::class, 'store'])->name('item.store');
-
     // Shopping
     Route::get('shopping-list', App\Livewire\ShoppingList\Index::class)
         ->name('shopping-list');
