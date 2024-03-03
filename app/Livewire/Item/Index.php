@@ -27,10 +27,18 @@ class Index extends Component
     {
         $query = Item::with('category', 'subCategory');
         if (!empty($this->search)) {
-            $query->whereRaw('lower(name) like ? ', '%' . $this->search . '%');
+            $searchTerm = strtolower($this->search);
+            $query->whereRaw('lower(name) like ?', ['%' . $searchTerm . '%'])
+                ->orWhereHas('category', function ($query) use ($searchTerm) {
+                    $query->whereRaw('lower(name) like ?', ['%' . $searchTerm . '%']);
+                })
+                ->orWhereHas('subCategory', function ($query) use ($searchTerm) {
+                    $query->whereRaw('lower(name) like ?', ['%' . $searchTerm . '%']);
+                });
         }
+
         $query->orderBy('id', 'desc');
-//        dd($query->get()->toArray());
+
         $items = $query->paginate(10);
 
         return view('livewire.item.index', compact('items'))->layout('layouts.app');

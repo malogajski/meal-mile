@@ -105,14 +105,35 @@
                 selected: null,
                 items: items,
                 get filteredItems() {
-                    return this.query === ''
-                        ? this.items
-                        : this.items.filter((item) => {
-                            return item.name.toLowerCase().includes(this.query.toLowerCase());
-                        })
-                },
+                    if (this.query === '') return this.items; // Ako nema upita, vrati sve item-e
+
+                    const queryLower = this.query.toLowerCase(); // Optimizacija, pretvara se samo jednom
+
+                    // Filtrira item-e na osnovu query-a. Uključuje proveru za ime, kategoriju i podkategoriju
+                    return this.items.filter(item =>
+                        item.name.toLowerCase().includes(queryLower) ||
+                        (item.categoryName && item.categoryName.toLowerCase().includes(queryLower)) ||
+                        (item.subCategoryName && item.subCategoryName.toLowerCase().includes(queryLower))
+                    );
+                }
             }
         }
+
+        // function itemSelector(items) {
+        //     return {
+        //         query: '',
+        //         selected: null,
+        //         items: items,
+        //         get filteredItems() {
+        //             return this.query === ''
+        //                 ? this.items
+        //                 : this.items.filter((item) => {
+        //                     item.categoryName.toLowerCase().includes(this.query.toLowerCase()) ||
+        //                     item.subCategoryName.toLowerCase().includes(this.query.toLowerCase());
+        //                 })
+        //         },
+        //     }
+        // }
     </script>
 </div>
 @push('scripts')

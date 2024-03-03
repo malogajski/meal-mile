@@ -4,6 +4,8 @@ namespace App\Livewire\ShoppingList;
 
 use App\Models\ShoppingList;
 use App\Models\ShoppingListItem;
+use App\Models\User;
+use App\Notifications\UserNotification;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -48,4 +50,10 @@ class Index extends Component
             DB::rollBack();
         }
     }
+
+//    public function sendTestEmail()
+//    {
+//        $user = User::find(auth()->user()->id);
+//        $user->notify(new UserNotification());
+//    }
 }

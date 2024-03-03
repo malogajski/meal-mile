@@ -37,17 +37,22 @@ class Create extends Component
     public function render()
     {
         $alreadyAddedItems = ShoppingListItem::where('shopping_list_id', $this->shopping_list_id)->pluck('item_id')->toArray();
-        $query = Item::select(['id', 'name']);
+        $query = Item::with('category', 'subCategory');
 
         if (!empty($alreadyAddedItems)) {
             $query->whereNotIn('id', $alreadyAddedItems);
         }
 
-        $items = $query->orderBy('name')
-            ->get();
+        $items = $query->orderBy('name')->get()->map(function ($item) {
+            return [
+                'id'              => $item->id,
+                'name'            => $item->name,
+                'categoryName'    => $item->category ? $item->category->name : '',
+                'subCategoryName' => $item->subCategory ? $item->subCategory->name : '',
+            ];
+        });
 
-        return view('livewire.shopping-list-item.create', compact('items'))
-            ->layout('layouts.app');
+        return view('livewire.shopping-list-item.create', compact('items'))->layout('layouts.app');
     }
 
     public function add($item)

@@ -18,7 +18,7 @@
                     <label for="category_id" class="text-xs uppercase font-bold">Category</label>
                     <div class="flex items-center flex-row space-x-2">
 
-                        <select name="category_id" id="category_id" wire:model="categoryId" class="select w-full">
+                        <select name="category_id" id="category_id" wire:model.live="categoryId" class="select w-full">
                             <option value=""></option>
                             @foreach($lists['categories'] as $key => $value)
                                 <option value="{{ $key }}">{{ $value }}</option>
