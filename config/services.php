@@ -34,13 +34,13 @@ return [
     'github' => [
         'client_id' => env('GITHUB_CLIENT_ID'),
         'client_secret' => env('GITHUB_CLIENT_SECRET'),
-        'redirect' => 'auth/github/callback',
+        'redirect' => 'https://meal-mile.umld.org/auth/github/callback',
     ],
 
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => 'auth/google/callback', //env('GOOGLE_REDIRECT_URI'),
+        'redirect' => 'https://meal-mile.umld.org/auth/google/callback', //env('GOOGLE_REDIRECT_URI'),
     ],
 
 
