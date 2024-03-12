@@ -21,9 +21,9 @@ Route::get('dashboard', [\App\Http\Controllers\DashboardController::class, 'inde
     ->name('dashboard');
 
 // Providers
-Route::get('/auth/{provider}/redirect', [\App\Http\Controllers\Auth\ProviderController::class, 'redirect']);
+Route::get('/auth/{provider}/redirect', [\App\Http\Controllers\Auth\ProviderController::class, 'redirectSocial']);
 
-Route::get('/auth/{provider}/callback', [\App\Http\Controllers\Auth\ProviderController::class, 'callback']);
+Route::get('/auth/{provider}/callback', [\App\Http\Controllers\Auth\ProviderController::class, 'callbackSocial']);
 
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
