@@ -14,6 +14,12 @@
                     {{ auth()->user()->name }}
                 </div>
             </div>
+
+            <form method="GET" action="{{ route('send-default-email') }}">
+                @csrf
+                <button type="submit" class="bg-red-600 text-white p-2 rounded hover:bg-red-700 m-2">Send Default Email</button>
+            </form>
+
             <!-- Statistics -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Total number of lists -->

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\DefaultEmail;
 use App\Models\ShoppingList;
 use App\Models\ShoppingListItem;
 use App\Models\Item;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class DashboardController extends Controller
 {
@@ -41,5 +43,11 @@ class DashboardController extends Controller
         // Pass the calculated data to the dashboard view
         // compact() is a PHP function that creates an array from existing variables.
         return view('dashboard', compact('totalLists', 'totalItems', 'mostFrequentItemName', 'mostFrequentItem', 'avgItemsPerList'));
+    }
+
+    public function sendDefaultEmail()
+    {
+        Mail::to('darko.malogajski@gmail.com')->send(new DefaultEmail());
+        return redirect()->back();
     }
 }

@@ -105,11 +105,11 @@
                 selected: null,
                 items: items,
                 get filteredItems() {
-                    if (this.query === '') return this.items; // Ako nema upita, vrati sve item-e
+                    if (this.query === '') return this.items; // No query - return all
 
-                    const queryLower = this.query.toLowerCase(); // Optimizacija, pretvara se samo jednom
+                    const queryLower = this.query.toLowerCase();
 
-                    // Filtrira item-e na osnovu query-a. Uključuje proveru za ime, kategoriju i podkategoriju
+                    // Filtering items from query. Checking name, category and subcategory
                     return this.items.filter(item =>
                         item.name.toLowerCase().includes(queryLower) ||
                         (item.categoryName && item.categoryName.toLowerCase().includes(queryLower)) ||

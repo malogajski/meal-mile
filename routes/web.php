@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,11 @@ Route::view('/', 'welcome');
 Route::get('dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
+
+// Providers
+Route::get('/auth/{provider}/redirect', [\App\Http\Controllers\Auth\ProviderController::class, 'redirect']);
+
+Route::get('/auth/{provider}/callback', [\App\Http\Controllers\Auth\ProviderController::class, 'callback']);
 
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
@@ -39,6 +45,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         ->name('shopping-list-edit');
     Route::get('shopping-list/{id}/items', App\Livewire\ShoppingListItem\Create::class)
         ->name('shopping-list-items');
+
+    // Default Email
+    Route::get('dashboard/email', [\App\Http\Controllers\DashboardController::class, 'sendDefaultEmail'])->name('send-default-email');
 });
 
 Route::view('profile', 'profile')
