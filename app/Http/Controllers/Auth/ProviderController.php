@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Laravel\Socialite\Facades\Socialite;
 
 class ProviderController extends Controller
@@ -19,32 +20,46 @@ class ProviderController extends Controller
     {
         $user = Socialite::driver($provider)->user();
 
-        $this->signOrRegisterWithProvider($user, $provider);
+        $success = $this->signOrRegisterWithProvider($user, $provider);
+
+        if ($success) {
+            return redirect()->route('dashboard');
+        } else {
+            return redirect()->route('login');
+        }
     }
 
     public function signOrRegisterWithProvider($socialUser, $provider)
     {
-        $user = User::where($provider . '_id', $socialUser->id)->orWhere('email', $socialUser->email)->first();
+        try {
+            $user = User::where($provider . '_id', $socialUser->id)->orWhere('email', $socialUser->email)->first();
 
-        if (empty($user)) {
-            $user = User::updateOrCreate([
-                $provider . '_id' => $socialUser->id,
-            ], [
-                'name'                 => $socialUser->name,
-                'email'                => $socialUser->email,
-                $provider . '_token'         => $socialUser->token,
-                $provider . '_refresh_token' => $socialUser->refreshToken ?? null,
-            ]);
-        } else {
-            $user->update([
-                $provider . '_id'            => $socialUser->id,
-                $provider . '_token'         => $socialUser->token,
-                $provider . '_refresh_token' => $socialUser->refreshToken ?? null,
-            ]);
+            if (empty($user)) {
+                $user = User::updateOrCreate([
+                    $provider . '_id' => $socialUser->id,
+                ], [
+                    'name'                 => $socialUser->name,
+                    'email'                => $socialUser->email,
+                    $provider . '_token'         => $socialUser->token,
+                    $provider . '_refresh_token' => $socialUser->refreshToken ?? null,
+                ]);
+            } else {
+                $user->update([
+                    $provider . '_id'            => $socialUser->id,
+                    $provider . '_token'         => $socialUser->token,
+                    $provider . '_refresh_token' => $socialUser->refreshToken ?? null,
+                ]);
+            }
+
+            Auth::login($user);
+
+            if (Auth::check()) {
+                return true;
+            }
+        } catch (\Throwable $e) {
+            Log::error('[SOCIAL LOGIN OR REGISTER ERROR]: ' . $e->getMessage());
         }
 
-        Auth::login($user);
-
-        return redirect()->route('dashboard');
+        return false;
     }
 }
