@@ -32,6 +32,10 @@ class ProviderController extends Controller
     public function signOrRegisterWithProvider($socialUser, $provider)
     {
         Log::info('[SOCIALITE ACCESS PAYLOAD][' . $provider . ']: ' . json_encode($socialUser));
+
+
+
+
         try {
             $user = User::where($provider . '_id', $socialUser->id)->orWhere('email', $socialUser->email)->first();
 
