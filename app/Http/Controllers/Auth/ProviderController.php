@@ -31,6 +31,7 @@ class ProviderController extends Controller
 
     public function signOrRegisterWithProvider($socialUser, $provider)
     {
+        Log::info('[SOCIALITE ACCESS PAYLOAD][' . $provider . ']: ' . json_encode($socialUser));
         try {
             $user = User::where($provider . '_id', $socialUser->id)->orWhere('email', $socialUser->email)->first();
 
@@ -38,8 +39,8 @@ class ProviderController extends Controller
                 $user = User::updateOrCreate([
                     $provider . '_id' => $socialUser->id,
                 ], [
-                    'name'                 => $socialUser->name,
-                    'email'                => $socialUser->email,
+                    'name'                       => $socialUser->name,
+                    'email'                      => $socialUser->email,
                     $provider . '_token'         => $socialUser->token,
                     $provider . '_refresh_token' => $socialUser->refreshToken ?? null,
                 ]);
