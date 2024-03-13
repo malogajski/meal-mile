@@ -71,7 +71,14 @@ $login = function () {
         </div>
     </form>
 
-    <p class="text-gray-700 dark:text-gray-300 mt-6 pt-6 border-t text-center text-lg font-semibold">Sign in with social</p>
+    <div class="relative mt-10">
+        <div class="absolute inset-0 flex items-center" aria-hidden="true">
+            <div class="w-full border-t border-gray-200"></div>
+        </div>
+        <div class="relative flex justify-center text-sm font-medium leading-6">
+            <span class="bg-white px-6 text-gray-900">Or continue with</span>
+        </div>
+    </div>
     <div class="mt-6 flex w-full items-center justify-between">
         <!-- Google -->
         <a href="/auth/google/redirect" data-twe-ripple-init data-twe-ripple-color="light"
