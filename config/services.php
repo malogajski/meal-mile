@@ -50,8 +50,8 @@ return [
     ],
 
     'twitter' => [
-        'consumer_key' => env('TWITTER_CLIENT_ID'),
-        'consumer_secret' => env('TWITTER_CLIENT_SECRET'),
+        'client_id' => env('TWITTER_CLIENT_ID'),
+        'client_secret' => env('TWITTER_CLIENT_SECRET'),
         'redirect' => 'https://meal-mile.umld.org/auth/twitter/callback',
     ],
 ];
