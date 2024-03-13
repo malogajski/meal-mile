@@ -30,7 +30,13 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->dropColumn('github_id');
+            $table->dropColumn('github_token');
+            $table->dropColumn('github_refresh_token');
+
+            $table->dropColumn('google_id');
+            $table->dropColumn('google_token');
+            $table->dropColumn('google_refresh_token');
         });
     }
 };
