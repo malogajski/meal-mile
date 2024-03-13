@@ -43,5 +43,9 @@ return [
         'redirect' => 'https://meal-mile.umld.org/auth/google/callback', //env('GOOGLE_REDIRECT_URI'),
     ],
 
-
+    'facebook' => [
+        'client_id' => env('FACEBOOK_CLIENT_ID'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
+        'redirect' => 'https://meal-mile.umld.org/auth/google/callback', //env('GOOGLE_REDIRECT_URI'),
+    ],
 ];
