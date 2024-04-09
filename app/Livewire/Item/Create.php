@@ -15,6 +15,7 @@ use LivewireUI\Modal\ModalComponent;
 class Create extends ModalComponent
 {
     use WithFileUploads;
+
     public $name;
     public $lists = [];
     public $categoryId;
@@ -22,11 +23,13 @@ class Create extends ModalComponent
     public Item $item;
     public $itemId;
     public $pathToFile = '';
+    public $checkList = false;
+    public $shoppingList = true;
 
     protected $listeners = [
         'refreshCreateItem',
         'fileSelected',
-        'fileUpload'
+        'fileUpload',
     ];
 
     public function fileSelected($file)
@@ -83,11 +86,13 @@ class Create extends ModalComponent
     public function save(Request $request)
     {
         $data = [
-            'team_id'     => auth()->user()->team_id,
-            'name'        => $this->name,
-            'user_id'     => auth()->user()->id,
-            'category_id' => $this->categoryId,
-            'created_at'  => Carbon::now(),
+            'team_id'       => auth()->user()->team_id,
+            'name'          => $this->name,
+            'user_id'       => auth()->user()->id,
+            'category_id'   => $this->categoryId,
+            'created_at'    => Carbon::now(),
+            'shopping_list' => $this->shoppingList,
+            'check_list'    => $this->checkList,
         ];
 
         if ($this->categoryId) {

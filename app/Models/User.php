@@ -55,8 +55,24 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo(Team::class);
     }
+    public function currentTeam(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Team::class, 'team_id');
+    }
+
+    public function ownedTeams(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Team::class, 'owner_id');
+    }
+
     public function teams(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Team::class);
+        return $this->belongsToMany(Team::class)->withPivot('approved');
+    }
+
+    public function switchTeam($teamId): void
+    {
+        $this->team_id = $teamId;
+        $this->save();
     }
 }

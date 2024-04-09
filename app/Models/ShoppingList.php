@@ -18,6 +18,7 @@ class ShoppingList extends Model
         'start',
         'end',
         'total_amount',
+        'type',
         'active',
     ];
 

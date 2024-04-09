@@ -11,10 +11,31 @@ class Team extends Model
 
     protected $fillable = [
         'name',
+        'owner_id',
+        'team_code',
     ];
 
-    public function users()
+    protected static function boot(): void
     {
-        return $this->belongsToMany(User::class);
+        parent::boot();
+
+        static::creating(function ($team) {
+            $team->team_code = static::generateTeamCode();
+        });
+    }
+
+    protected static function generateTeamCode($length = 8): string
+    {
+        return strtoupper(substr(md5(uniqid()), 0, $length));
+    }
+
+    public function owner(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class, 'owner_id');
+    }
+
+    public function members(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(User::class)->withPivot('approved');
     }
 }

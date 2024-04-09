@@ -10,10 +10,12 @@ use Illuminate\Validation\Rule;
 use function Livewire\Volt\state;
 
 state([
-    'name'  => fn() => auth()->user()->name,
-    'email' => fn() => auth()->user()->email,
-    'team'  => fn() => auth()->user()->load('team')->team->name ?? '',
-    'teams' => fn() => User::with('teams')->find(auth()->user()->id)->teams ?? null,
+    'name'      => fn() => auth()->user()->name,
+    'email'     => fn() => auth()->user()->email,
+    'team'      => fn() => auth()->user()->load('team')->team->name ?? '',
+    'teams'     => fn() => User::with('teams')->find(auth()->user()->id)->teams ?? null,
+    'team_code' => fn() => auth()->user()->load('team')->team->team_code,
+    'join_to_team_code' => ''
 ]);
 
 $updateProfileInformation = function () {
@@ -49,6 +51,26 @@ $sendVerification = function () {
     Session::flash('status', 'verification-link-sent');
 };
 
+$requestJoinToTeam = function ($team_code) {
+
+    if (empty($team_code)) {
+        return;
+    }
+    $user = Auth::user();
+
+//    if ($user->hasVerifiedEmail()) {
+//        $this->redirectIntended(default: RouteServiceProvider::HOME);
+//
+//        return;
+//    }
+
+    $team = \App\Models\Team::where('team_code', $team_code)->firstOrFail();
+    $team->members()->attach($user->id, ['approved' => false, 'owner_id' => $team->owner_id]);
+    $user->team_id = $team->id;
+    $user->save();
+    $user->refresh();
+};
+
 ?>
 
 <section>
@@ -60,24 +82,6 @@ $sendVerification = function () {
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
             {{ __("Update your account's profile information and email address.") }}
         </p>
-
-        @if(!empty($teams))
-            <div class="my-6">
-                <x-input-label for="name" :value="__('Your team')"/>
-                <p class="font-semibold text-gray-700 dark:text-gray-300">{{ $team ?? 'n-a' }}</p>
-            </div>
-            <div class="my-6">
-                <x-input-label for="name" :value="__('You are in teams')"/>
-                <ul class="flex items-center space-x-2">
-                    @foreach($teams->pluck('name')->toArray() as $member)
-                        <li class="text-xs px-1.5 py-0.5 rounded-full bg-lime-700 text-white">{{ $member }}</li>
-                    @endforeach
-                </ul>
-
-            </div>
-        @else
-            <p>You don't belong to any team</p>
-        @endif
     </header>
 
     <form wire:submit="updateProfileInformation" class="mt-6 space-y-6">

@@ -10,6 +10,19 @@
     </div>
 
     <div class="mb-4 flex flex-col">
+        <label for="name">Type</label>
+        <select id="type" class="rounded dark:bg-gray-700 dark:text-gray-300" wire:model="type">
+            <option value=""></option>
+            @foreach($list['type'] as $key => $listType)
+                <option value="{{ $key }}">{{ $listType }}</option>
+            @endforeach
+        </select>
+        <div>
+            @error('name') <span class="error">{{ $message }}</span> @enderror
+        </div>
+    </div>
+
+    <div class="mb-4 flex flex-col">
         <label for="description">Description</label>
         <textarea id="description" class="rounded dark:bg-gray-700 dark:text-gray-300" wire:model="description"></textarea>
         <div>
