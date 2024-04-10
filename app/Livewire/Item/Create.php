@@ -73,6 +73,8 @@ class Create extends ModalComponent
             $this->name = $this->item->name;
             $this->categoryId = $this->item->category_id;
             $this->subCategoryId = $this->item->sub_category_id;
+            $this->shoppingList = $this->item->shopping_list;
+            $this->checkList = $this->item->check_list;
         }
 
         $this->getLists();
@@ -114,6 +116,9 @@ class Create extends ModalComponent
                 'name'            => $this->name,
                 'category_id'     => $this->categoryId,
                 'sub_category_id' => $this->subCategoryId,
+                'shopping_list'   => $this->shoppingList,
+                'check_list'      => $this->checkList,
+                'user_id'         => auth()->user()->id,
             ]);
 
 

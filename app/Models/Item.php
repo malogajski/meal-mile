@@ -21,10 +21,17 @@ class Item extends Model implements HasMedia
         'name',
         'category_id',
         'sub_category_id',
+        'shopping_list',
+        'check_list',
     ];
 
     protected $appends = [
-        'image'
+        'image',
+    ];
+
+    protected $casts = [
+        'shopping_list' => 'boolean',
+        'check_list'    => 'boolean',
     ];
 
     public function user()

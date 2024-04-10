@@ -1,5 +1,9 @@
 <div class="modal text-sm">
-    <p class="text-xl font-semibold">@if(empty($item->id)) Create @else Edit @endif Item</p>
+    <p class="text-xl font-semibold">@if(empty($item->id))
+            Create
+        @else
+            Edit
+        @endif Item</p>
     <div class="w-full mt-2 mb-4 text-gray-700 dark:text-gray-300">
 
         <form enctype="multipart/form-data" wire:submit="save" class="mt-6">
@@ -15,19 +19,13 @@
                 </div>
 
                 <div class="flex flex-col space-y-2 rounded p-2 bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300">
-                    <label for="shoppingList" class="text-xs uppercase font-bold">Use for shopping</label>
-                    <div class="flex items-center space-x-2">
-                        <input type="checkbox" class="text-input rounded" id="shoppingList" wire:model="shoppingList">
-                    </div>
-                    <div>@error('shoppingList') {{ $message }} @enderror</div>
+                    <x-toggle :wire-model="'shoppingList'" :title="'Use for shopping'" id="shoppingList" :use-defer="true"/>
+                    @error('shoppingList') <div>{{ $message }}</div>@enderror
                 </div>
 
                 <div class="flex flex-col space-y-2 rounded p-2 bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300">
-                    <label for="checkList" class="text-xs uppercase font-bold">Use for check list</label>
-                    <div class="flex items-center space-x-2">
-                        <input type="checkbox" class="text-input rounded" id="checkList" wire:model="checkList">
-                    </div>
-                    <div>@error('checkList') {{ $message }} @enderror</div>
+                    <x-toggle :wire-model="'checkList'" :title="'Use for check list'" id="checkList" :use-defer="true"/>
+                    @error('checkList') <div>{{ $message }}</div>@enderror
                 </div>
 
                 <div class="flex flex-col space-y-2 rounded p-2 bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300">

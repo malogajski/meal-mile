@@ -24,16 +24,17 @@ class Create extends Component
 
     public function mount($id = null)
     {
+        $this->list['type'] = [0 => ListTypeEnum::getDescription(ListTypeEnum::ShoppingList), 1=> ListTypeEnum::getDescription(ListTypeEnum::CheckList)];
         if ($id) {
             $this->shoppingListId = $id;
             $this->shoppingList = ShoppingList::find($id);
             $this->name = $this->shoppingList->name;
             $this->description = $this->shoppingList->description;
             $this->start = $this->shoppingList->start;
+            $this->type = $this->shoppingList->type;
         }
         $this->user_id = auth()->user()->id;
         $this->team_id = auth()->user()->team_id;
-        $this->list['type'] = [0 => ListTypeEnum::getDescription(ListTypeEnum::ShoppingList), 1=> ListTypeEnum::getDescription(ListTypeEnum::CheckList)];
     }
 
     public function render()

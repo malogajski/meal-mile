@@ -16,7 +16,13 @@
                     <p class="font-semibold">{{ $shoppingList->name }}</p>
                     <span class="text-blue-500 ml-2 text-xs">(items: {{ $shoppingList->items ? $shoppingList->items->count() : 0 }})</span>
                     <p class="text-xs text-gray-500">Created by: {{ $shoppingList->user->name ?? '' }}</p>
-                    <p class="text-xs text-gray-500">Type: {{ \App\Enums\ListTypeEnum::getKey($shoppingList->type) ?? '' }}</p>
+                        <div>
+                            @if($shoppingList->type === \App\Enums\ListTypeEnum::ShoppingList)
+                            <span class="badge-purple">{{ \App\Enums\ListTypeEnum::getKey($shoppingList->type) ?? '' }}</span>
+                            @else
+                                <span class="badge-green">{{ \App\Enums\ListTypeEnum::getKey($shoppingList->type) ?? '' }}</span>
+                            @endif
+                        </div>
                 </span>
                     <x-secondary-button class="flex justify-center w-16 h-full" wire:click="edit({{$shoppingList->id}})"><i class="fa fa-edit"></i></x-secondary-button>
                     <x-danger-button class="flex justify-center w-16 h-full" wire:click="delete({{$shoppingList->id}})"><i class="fa fa-trash-alt"></i></x-danger-button>
