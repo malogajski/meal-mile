@@ -40,7 +40,9 @@
 
             </li>
         @empty
-            <p>No items added</p>
+            <div class="flex items-center justify-center object-fill">
+                <img src="{{ asset('assets/Shopping Bag.gif') }}" alt="No items added" class="p-6 w-36 h-36">
+            </div>
         @endforelse
     </ul>
 </div>

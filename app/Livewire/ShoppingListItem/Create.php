@@ -57,6 +57,10 @@ class Create extends Component
 
     public function add($item)
     {
+        if (empty($item['id'])) {
+            return;
+        }
+
         $this->item_id = $item['id'];
         $data = $this->all();
 
@@ -72,6 +76,7 @@ class Create extends Component
     {
         ShoppingListItem::where('shopping_list_id', $this->shopping_list_id)->where('item_id', $itemId)->delete();
         $this->dispatch('refreshShippingList');
+        $this->dispatch('$refresh');
     }
 
     public function resetList()

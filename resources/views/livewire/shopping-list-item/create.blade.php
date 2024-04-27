@@ -1,8 +1,8 @@
-<div x-data="{ showItems: false }">
-    <div class="m-6 p-6 bg-white text-gray-700 dark:text-gray-300 rounded-xl shadow-xl dark:bg-gray-800">
+<div x-data="{ showItems: false }" class="p-2">
+    <div class="mt-3 p-6 bg-white text-gray-700 dark:text-gray-300 rounded-md shadow-xl dark:bg-gray-800">
         <!-- Back Button at the top -->
-        <div class="flex justify-center">
-            <x-secondary-button onclick="history.back()">
+        <div class="mb-3">
+            <x-secondary-button onclick="history.back()" class="w-full flex justify-center">
                 <i class="fa fa-arrow-alt-circle-left mr-1"></i> Back
             </x-secondary-button>
         </div>
@@ -19,7 +19,7 @@
             x-data="itemSelector({{ json_encode($items) }})"
             class="max-w-xs w-full"
         >
-            <div x-combobox x-model="selected">
+            <div x-combobox x-model="selected" x-init="selected = ''">
                 <div class="mt-1 relative rounded-md focus-within:ring-2 focus-within:ring-blue-500">
                     <div class="dark:bg-gray-700 flex items-center justify-between gap-2 w-full bg-white pl-5 pr-3 py-2.5 rounded-md shadow">
                         <input
@@ -63,37 +63,20 @@
                     </div>
                 </div>
 
-                <x-primary-button class="my-2 w-full text-center flex justify-center" x-on:click="$wire.call('add', selected); $refs.searchInput.value = ''; query = ''; selected = ''"><i class="fa fa-arrow-alt-circle-down mr-1"></i> Add</x-primary-button>
+                <x-primary-button class="my-2 w-full text-center flex justify-center"
+                                  x-show="selected !== ''"
+                                  x-cloak
+                                  x-on:click="$wire.call('add', selected); $refs.searchInput.value = ''; query = ''; selected = ''">
+                    <i class="fa fa-arrow-alt-circle-down mr-1"></i> Add
+                </x-primary-button>
+
             </div>
 
         </div>
 
-{{--        <div class="w-full flex justify-center my-2 mb-2">--}}
-{{--            <x-primary-button @click="showItems = !showItems"--}}
-{{--                              x-text="showItems ? 'Hide items' : 'Show items'"--}}
-{{--                              class="transition duration-200 ease-in-out transform hover:scale-105"/>--}}
-{{--        </div>--}}
-{{--        <div class="flex flex-wrap items-start"--}}
-{{--             x-show="showItems"--}}
-{{--             x-cloak--}}
-{{--             x-transition:enter="transition ease-out duration-300"--}}
-{{--             x-transition:enter-start="opacity-0 transform scale-90"--}}
-{{--             x-transition:enter-end="opacity-100 transform scale-100"--}}
-{{--             x-transition:leave="transition ease-in duration-300"--}}
-{{--             x-transition:leave-start="opacity-100 transform scale-100"--}}
-{{--             x-transition:leave-end="opacity-0 scale-90">--}}
-{{--            @foreach($items as $item)--}}
-{{--                @php--}}
-{{--                    $isInList = \App\Models\ShoppingListItem::where('shopping_list_id', $shopping_list_id)->where('item_id', $item->id)->exists();--}}
-{{--                @endphp--}}
-{{--                <span--}}
-{{--                    class="min-w-20 text-center p-2 rounded transition duration-200 ease-in-out transform hover:-translate-y-1 @if($isInList) bg-gray-400 text-gray-800 @else bg-lime-700 text-white cursor-pointer @endif mx-1 my-1"--}}
-{{--                    wire:key="{{ $item->id }}" @if(!$isInList) wire:click="add({{$item->id}})" @else wire:click="remove({{$item->id}})" @endif>{{ $item->name }}</span>--}}
-{{--            @endforeach--}}
-{{--        </div>--}}
     </div>
 
-    <div class="mt-6 bg-gray-100 dark:bg-gray-800 w-full p-6">
+    <div class="mt-6 bg-gray-100 dark:bg-gray-800 w-full p-6 rounded-md">
         <livewire:shopping-list-item.index :id="$shopping_list_id"/>
     </div>
     <script defer src="https://unpkg.com/@alpinejs/ui@3.13.5-beta.0/dist/cdn.min.js"></script>
@@ -119,21 +102,6 @@
             }
         }
 
-        // function itemSelector(items) {
-        //     return {
-        //         query: '',
-        //         selected: null,
-        //         items: items,
-        //         get filteredItems() {
-        //             return this.query === ''
-        //                 ? this.items
-        //                 : this.items.filter((item) => {
-        //                     item.categoryName.toLowerCase().includes(this.query.toLowerCase()) ||
-        //                     item.subCategoryName.toLowerCase().includes(this.query.toLowerCase());
-        //                 })
-        //         },
-        //     }
-        // }
     </script>
 </div>
 @push('scripts')

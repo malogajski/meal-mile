@@ -25,7 +25,6 @@ class Index extends Component
             ->orderBy('id', 'desc')
             ->orderBy('is_purchased')
             ->get();
-//        dd($shoppingItems->toArray());
 
         return view('livewire.shopping-list-item.index', compact('shoppingItems'))
             ->layout('layouts.app');
