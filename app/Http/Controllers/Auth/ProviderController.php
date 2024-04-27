@@ -21,7 +21,10 @@ class ProviderController extends Controller
 
     public function callbackSocial($provider)
     {
-        $team_code = decrypt(session('team_code'));
+        $team_code = session('team_code');
+        if (!empty($team_code)) {
+            $team_code = decrypt(session('team_code'));
+        }
 
         $user = Socialite::driver($provider)->user();
 
