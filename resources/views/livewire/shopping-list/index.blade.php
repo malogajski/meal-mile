@@ -12,10 +12,10 @@
         @forelse($shoppingLists as $shoppingList)
             <li class="flex">
                 <div class="flex items-center space-x-2 w-full">
-                    <span class="w-full text-center flex flex-col items-center justify-center transition duration-200 ease-in-out transform hover:scale-95 bg-gray-100 hover:bg-gray-300 text-gray-800 py-3 px-4 rounded" wire:click="goToItems({{$shoppingList->id}})">
+                    <span class="w-full text-center flex flex-col items-center justify-center transition duration-200 ease-in-out transform bg-gray-100 hover:bg-gray-300 dark:bg-gray-600 dark:hover:bg-gray-500 text-gray-800 dark:text-gray-300 py-3 px-4 rounded" wire:click="goToItems({{$shoppingList->id}})">
                     <p class="font-semibold">{{ $shoppingList->name }}</p>
                     <span class="text-blue-500 ml-2 text-xs">(items: {{ $shoppingList->items ? $shoppingList->items->count() : 0 }})</span>
-                    <p class="text-xs text-gray-500">Created by: {{ $shoppingList->user->name ?? '' }}</p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">Created by: {{ $shoppingList->user->name ?? '' }}</p>
                         <div>
                             @if($shoppingList->type === \App\Enums\ListTypeEnum::ShoppingList)
                             <span class="badge-purple">{{ \App\Enums\ListTypeEnum::getKey($shoppingList->type) ?? '' }}</span>
