@@ -30,28 +30,35 @@ $logout = function (Logout $logout) {
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('items')" :active="request()->routeIs('items')" wire:navigate>
-                        {{ __('Items') }}
-                    </x-nav-link>
-                </div>
-
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('categories')" :active="request()->routeIs('categories')" wire:navigate>
-                        {{ __('Categories') }}
-                    </x-nav-link>
-                </div>
-
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('sub-categories')" :active="request()->routeIs('sub-categories')" wire:navigate>
-                        {{ __('Sub-Categories') }}
-                    </x-nav-link>
-                </div>
-
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('shopping-list')" :active="request()->routeIs('shopping-list.index')" wire:navigate>
                         {{ __('Shopping list') }}
                     </x-nav-link>
                 </div>
+
+                <div class="hidden sm:flex sm:items-center sm:ms-10 space-x-8">
+                    <x-dropdown align="right" width="48">
+                        <x-slot name="trigger">
+                            <button class="x-cloak inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                                <span>{{ __('Settings') }}</span>
+                            </button>
+                        </x-slot>
+
+                        <x-slot name="content">
+                            <x-dropdown-link :href="route('items')" wire:navigate>
+                                {{ __('Items') }}
+                            </x-dropdown-link>
+
+                            <x-dropdown-link :href="route('categories')" wire:navigate>
+                                {{ __('Categories') }}
+                            </x-dropdown-link>
+
+                            <x-dropdown-link :href="route('sub-categories')" wire:navigate>
+                                {{ __('Sub-Categories') }}
+                            </x-dropdown-link>
+                        </x-slot>
+                    </x-dropdown>
+                </div>
+
             </div>
 
             <!-- Settings Dropdown -->
@@ -101,23 +108,28 @@ $logout = function (Logout $logout) {
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+    <div :class="{'block': open, 'hidden': ! open}" x-data="{ openSettings: false }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('items')" :active="request()->routeIs('items')" wire:navigate>
-                {{ __('Items') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('categories')" :active="request()->routeIs('categories')" wire:navigate>
-                {{ __('Categories') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('sub-categories')" :active="request()->routeIs('sub-categories')" wire:navigate>
-                {{ __('Sub-Categories') }}
-            </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('shopping-list')" :active="request()->routeIs('shopping-list')" wire:navigate>
                 {{ __('Shopping List') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link @click="openSettings = !openSettings" :active="request()->routeIs('items') || request()->routeIs('categories') || request()->routeIs('sub-categories')">
+                {{ __('Settings') }}
+            </x-responsive-nav-link>
+            <div x-show="openSettings" x-cloak class="ml-1">
+                <x-responsive-nav-link :href="route('items')" :active="request()->routeIs('items')" wire:navigate>
+                    {{ __('Items') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('categories')" :active="request()->routeIs('categories')" wire:navigate>
+                    {{ __('Categories') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('sub-categories')" :active="request()->routeIs('sub-categories')" wire:navigate>
+                    {{ __('Sub-Categories') }}
+                </x-responsive-nav-link>
+            </div>
         </div>
 
         <!-- Responsive Settings Options -->

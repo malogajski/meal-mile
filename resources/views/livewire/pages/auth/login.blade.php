@@ -124,4 +124,10 @@ $login = function () {
         </a>
     </div>
 
+    {{-- Registration --}}
+    <div class="mt-4 text-sm flex items-center justify-center">
+        <span class="mr-1">Not a member?</span>
+        <a href="{{ route('register') }}" class="font-semibold text-blue-800">Register now</a>
+    </div>
+
 </div>

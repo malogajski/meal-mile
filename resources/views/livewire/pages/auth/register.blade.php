@@ -62,14 +62,18 @@ $register = function () {
 ?>
 
 <div x-data="{ showTeam: false, showForm: false, showOptions: true, teamCode: '' }">
+    <p class="text-center font-semibold text-lg">Registration</p>
     {{-- Options --}}
-    <div class="flex flex-col w-full" x-show="showOptions">
+    <div class="flex flex-col w-full mt-6" x-show="showOptions">
         <div class="flex justify-between mb-4 space-x-2">
             <button class="btn-lg btn-default" @click="showTeam = true; showOptions = false">Join the team <i class="fa-solid fa-people-group ml-1"></i></button>
             <button class="btn-lg btn-purple" @click="showForm = true; showOptions = false">New registration <i class="fa-solid fa-user-plus ml-1"></i></button>
         </div>
 
-        <a class="text-sm hover:underline text-center" href="{{ route('login') }}">Back to login</a>
+        <div class="flex items-center justify-center text-sm">
+            <span class="mr-1">Back to</span>
+            <a class="text-sm hover:underline text-center font-semibold text-blue-800" href="{{ route('login') }}">Login</a>
+        </div>
     </div>
 
     <div class="flex justify-end my-2" x-show="!showOptions" x-cloak>
@@ -80,7 +84,7 @@ $register = function () {
 
     {{-- Team code --}}
     <div x-show="showTeam" class="flex flex-col w-full">
-        <input type="text" x-model="teamCode" placeholder="Enter Team Code" x-bind:maxlength="16" x-on:input="teamCode.length >= 4 ? $refs.continueButton.removeAttribute('disabled') : $refs.continueButton.setAttribute('disabled', true)">
+        <input type="text" x-model="teamCode" placeholder="Enter The Team Code" x-bind:maxlength="16" x-on:input="teamCode.length >= 4 ? $refs.continueButton.removeAttribute('disabled') : $refs.continueButton.setAttribute('disabled', true)">
         <button x-ref="continueButton" class="btn btn-green mt-2" @click="showForm = true; showTeam = false; $wire.set('team_code', teamCode)" :disabled="teamCode.length < 4 || teamCode.length > 16">Continue</button>
     </div>
 
