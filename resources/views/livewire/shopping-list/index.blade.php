@@ -1,4 +1,4 @@
-<div class="m-6 p-6 bg-white rounded-xl shadow-xl dark:bg-gray-800">
+<div class="m-2 p-6 bg-white rounded-xl shadow-xl dark:bg-gray-800">
     <x-loading-spinner wire:loading/>
 
     <div class="flex justify-end mb-8">
