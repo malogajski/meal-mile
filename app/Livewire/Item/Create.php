@@ -129,10 +129,13 @@ class Create extends ModalComponent
         }
 
         if (!empty($this->pathToFile)) {
+            info('Item image exists: ' . $this->pathToFile);
             $item->clearMediaCollection('items');
 
             $item->addMedia($this->pathToFile)
                 ->toMediaCollection('items');
+        } else {
+            info('Item NOT image exists');
         }
         $this->dispatch('refreshCreateItem');
         $this->closeModal();
