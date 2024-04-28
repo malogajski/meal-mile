@@ -43,39 +43,34 @@ class ProviderController extends Controller
         Log::info('[SOCIALITE ACCESS PAYLOAD][' . $provider . ']: ' . json_encode($socialUser));
 
         try {
+            $team = null;
             // Find the user by provider ID or email
             $user = User::where($provider . '_id', $socialUser->id)->orWhere('email', $socialUser->email)->first();
+            $teamId = $user->team_id; // Preserve the current team_id if it exists
 
             // Find the team based on team_code
             if (!empty($team_code)) {
                 $team = Team::where('team_code', $team_code)->first();
+                $teamId = $team->id; // Update teamId if a team is found for the team_code
             }
 
-            // If team exists and user doesn't have team_id, assign team to user
-            if (!empty($team) && empty($user->team_id)) {
-                $user->team_id = $team->id;
-                $user->save();
+            // Prepare user data to be updated or created
+            $userData = [
+                'name'                       => $socialUser->name,
+                'email'                      => $socialUser->email,
+                $provider . '_token'         => $socialUser->token,
+                $provider . '_refresh_token' => $socialUser->refreshToken ?? null,
+            ];
+
+            // Set team_id if team exists and user doesn't have a team_id already
+            if (!is_null($team) && empty($user->team_id)) {
+                $userData['team_id'] = $teamId;
             }
 
             // Create or update the user
-            if (empty($user)) {
-                $user = User::updateOrCreate([
-                    $provider . '_id' => $socialUser->id,
-                ], [
-                    'name'                       => $socialUser->name,
-                    'email'                      => $socialUser->email,
-                    $provider . '_token'         => $socialUser->token,
-                    $provider . '_refresh_token' => $socialUser->refreshToken ?? null,
-                    'team_id'                   => !empty($team) ? $team->id : null,
-                ]);
-            } else {
-                $user->update([
-                    $provider . '_id'            => $socialUser->id,
-                    $provider . '_token'         => $socialUser->token,
-                    $provider . '_refresh_token' => $socialUser->refreshToken ?? null,
-                    'team_id'                   => !empty($team) ? $team->id : null,
-                ]);
-            }
+            $user = User::updateOrCreate([
+                $provider . '_id' => $socialUser->id,
+            ], $userData);
 
             Auth::login($user);
 
