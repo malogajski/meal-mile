@@ -1,7 +1,7 @@
-<div class="m-2 p-6 bg-white rounded-xl shadow-xl dark:bg-gray-800">
+<div class="m-2 p-2 bg-white rounded-xl shadow-xl dark:bg-gray-800">
     <x-loading-spinner wire:loading/>
 
-    <div class="flex justify-end mb-8">
+    <div class="flex justify-end mb-8 mt-2">
         <x-primary-button class="transition duration-200 ease-in-out transform hover:scale-105 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" wire:click="newShoppingList">
             <i class="fa fa-plus mr-1"></i>
             New Shopping List
