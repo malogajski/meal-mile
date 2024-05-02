@@ -11,6 +11,10 @@ class Index extends Component
     use WithPagination;
 
     public $search = '';
+
+    protected $listeners = [
+        'refreshCategory' => '$refresh',
+    ];
     public function render()
     {
         $query = Category::query();
@@ -27,6 +31,8 @@ class Index extends Component
 
     public function delete($id)
     {
-        Category::destroy($id);
+        $category = Category::find($id);
+        $category->delete();
+        $this->dispatch('$refresh');
     }
 }

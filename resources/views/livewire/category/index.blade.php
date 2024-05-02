@@ -1,5 +1,5 @@
-<div class="p-2">
-    <div class="flex flex-col">
+<div class="p-2 text-gray-700 dark:text-gray-300">
+    <div class="flex flex-col w-full xl:w-1/2">
         <div class="-m-1.5 overflow-x-auto">
             <div class="p-1.5 min-w-full inline-block align-middle">
                 <div class="border rounded-lg divide-y divide-gray-200 dark:border-gray-700 dark:divide-gray-700">
@@ -23,7 +23,7 @@
                         </x-secondary-button>
                     </div>
                     <div class="overflow-hidden">
-                        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                        <table class="w-full divide-y divide-gray-200 dark:divide-gray-700 bg-white dark:bg-gray-800">
                             <thead class="bg-gray-50 dark:bg-gray-700">
                             <tr>
                                 <th scope="col" class="py-3 px-4 pe-0">
@@ -39,7 +39,7 @@
                             </thead>
                             <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
                             @forelse($categories as $category)
-                                <tr>
+                                <tr wire:key="{{ $category->id }}">
                                     <td class="py-3 ps-4">
                                         <div class="flex items-center h-5">
                                             <input id="hs-table-pagination-checkbox-1" type="checkbox"
@@ -55,7 +55,7 @@
 
                                         <button type="button"
                                                 wire:confirm="Are you sure?"
-                                                wire:click="delete"
+                                                wire:click="delete({{$category->id}})"
                                                 class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                                             <i class="fa fa-trash-alt"></i>
                                         </button>

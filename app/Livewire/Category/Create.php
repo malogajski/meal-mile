@@ -57,19 +57,19 @@ class Create extends ModalComponent
         $this->validate();
 
         $data = [
-            'name' => $this->name,
-            'team_id' => auth()->user()->team_id,
+            'name'       => $this->name,
+            'team_id'    => auth()->user()->team_id,
             'created_at' => Carbon::now(),
         ];
 
-        $ifCategoryExists = Category::where('team_id', auth()->user()->tema_id)
-            ->where('name', $this->name)
-            ->exists();
-
-        if (!$ifCategoryExists) {
+        if (!$this->categoryId) {
             Category::create($data);
-            $this->dispatch('refreshCreateItem');
-            $this->closeModal();
+        } else {
+            unset($data['created_at']);
+            $this->category->update($data);
         }
+
+        $this->dispatch('refreshCategory');
+        $this->closeModal();
     }
 }
