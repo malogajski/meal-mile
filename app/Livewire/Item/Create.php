@@ -75,6 +75,7 @@ class Create extends ModalComponent
             $this->subCategoryId = $this->item->sub_category_id;
             $this->shoppingList = $this->item->shopping_list;
             $this->checkList = $this->item->check_list;
+            $this->pathToFile = $this->item->getMedia('items')->first();
         }
 
         $this->getLists();
@@ -85,7 +86,7 @@ class Create extends ModalComponent
         return view('livewire.item.create');
     }
 
-    public function save(Request $request)
+    public function save()
     {
         $data = [
             'team_id'       => auth()->user()->team_id,
@@ -120,8 +121,6 @@ class Create extends ModalComponent
                 'check_list'      => $this->checkList,
                 'user_id'         => auth()->user()->id,
             ]);
-
-
         } else {
             if (!$isItemExists) {
                 $item = Item::create($data);
@@ -154,4 +153,33 @@ class Create extends ModalComponent
             $this->lists['sub_categories'] = [];
         }
     }
+    public function saveCanvasImage($dataURL)
+    {
+        // Decode the Base64 image data
+        $data = explode(',', $dataURL)[1];
+        $data = base64_decode($data);
+
+        // Create a temporary file and write the decoded image data to it
+        $tempFilePath = tempnam(sys_get_temp_dir(), 'canvas');
+        file_put_contents($tempFilePath, $data);
+
+        // Add the temporary file to the item's media collection
+        if (!empty($this->itemId)) {
+            $item = Item::find($this->itemId);
+            $item->clearMediaCollection('items');
+
+            $media = $item->addMedia($tempFilePath)
+                ->toMediaCollection('items');
+        }
+
+        // Update pathToFile with the new image URL
+        $this->pathToFile = null;
+
+        // Optionally delete the temporary file
+        // unlink($tempFilePath);
+
+        // Dispatch event to refresh the component
+        $this->dispatch('refreshCreateItem');
+    }
+
 }
