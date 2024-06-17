@@ -25,7 +25,6 @@ class ProviderController extends Controller
         if (!empty($team_code)) {
             $team_code = decrypt(session('team_code'));
         }
-        Log::info('[SOCIALITE ACCESS PAYLOAD][TEAM_CODE]: ' . $team_code ?? 'n-a');
 
         $user = Socialite::driver($provider)->user();
 
@@ -55,13 +54,21 @@ class ProviderController extends Controller
                 $teamId = $team->id ?? $teamId; // Update teamId if a team is found for the team_code
             }
 
-            // Prepare user data to be updated or created
-            $userData = [
-                'name'                       => $socialUser->name,
-                'email'                      => $socialUser->email,
-                $provider . '_token'         => $socialUser->token,
-                $provider . '_refresh_token' => $socialUser->refreshToken ?? null,
-            ];
+            if (empty($user)) {
+                // Prepare user data to be updated or created
+                $userData = [
+                    'name'                       => $socialUser->name,
+                    'email'                      => $socialUser->email,
+                    $provider . '_token'         => $socialUser->token,
+                    $provider . '_refresh_token' => $socialUser->refreshToken ?? null,
+                ];
+            } else {
+                $userData = [
+                    $provider . '_token'         => $socialUser->token,
+                    $provider . '_refresh_token' => $socialUser->refreshToken ?? null,
+                ];
+            }
+
 
             // Set team_id if team exists and user doesn't have a team_id already
             if (!is_null($team) && empty($user->team_id)) {
@@ -69,9 +76,11 @@ class ProviderController extends Controller
             }
 
             // Create or update the user
-            $user = User::updateOrCreate([
-                $provider . '_id' => $socialUser->id,
-            ], $userData);
+            if (empty($user)) {
+                $user = User::create($userData);
+            } else {
+                $user->update($userData);
+            }
 
             // Log in the user
             Auth::login($user);
