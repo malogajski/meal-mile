@@ -15,7 +15,7 @@ state([
 ]);
 
 rules([
-    'current_password' => ['required', 'string', 'current_password'],
+    'current_password' => ['nullable', 'string', 'current_password'],
     'password' => ['required', 'string', Password::defaults(), 'confirmed'],
 ]);
 
