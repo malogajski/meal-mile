@@ -73,6 +73,14 @@ class ProviderController extends Controller
                 $userData
             );
 
+            // Create a new team for the new user
+            if (empty($team)) {
+                $team = Team::create([
+                    'name' => $user->name . "'s Team",
+                ]);
+                $team->members()->attach($user->id, ['approved' => true, 'owner_id' => $user->id]);
+            }
+
             // Log in the user
             Auth::login($user);
 
