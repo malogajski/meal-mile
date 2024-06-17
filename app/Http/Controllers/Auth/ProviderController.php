@@ -25,6 +25,7 @@ class ProviderController extends Controller
         if (!empty($team_code)) {
             $team_code = decrypt(session('team_code'));
         }
+        Log::info('[SOCIALITE ACCESS PAYLOAD][TEAM_CODE]: ' . $team_code ?? 'n-a');
 
         $user = Socialite::driver($provider)->user();
 
