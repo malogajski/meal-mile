@@ -54,21 +54,13 @@ class ProviderController extends Controller
                 $teamId = $team->id ?? $teamId; // Update teamId if a team is found for the team_code
             }
 
-            if (empty($user)) {
-                // Prepare user data to be updated or created
-                $userData = [
-                    'name'                       => $socialUser->name,
-                    'email'                      => $socialUser->email,
-                    $provider . '_token'         => $socialUser->token,
-                    $provider . '_refresh_token' => $socialUser->refreshToken ?? null,
-                ];
-            } else {
-                $userData = [
-                    $provider . '_token'         => $socialUser->token,
-                    $provider . '_refresh_token' => $socialUser->refreshToken ?? null,
-                ];
-            }
-
+            // Prepare user data to be updated or created
+            $userData = [
+                'name'                       => $socialUser->name,
+                'email'                      => $socialUser->email,
+                $provider . '_token'         => $socialUser->token,
+                $provider . '_refresh_token' => $socialUser->refreshToken ?? null,
+            ];
 
             // Set team_id if team exists and user doesn't have a team_id already
             if (!is_null($team) && empty($user->team_id)) {
@@ -76,14 +68,17 @@ class ProviderController extends Controller
             }
 
             // Create or update the user
-            if (empty($user)) {
-                $user = User::create($userData);
-            } else {
-                $user->update($userData);
-            }
+            $user = User::updateOrCreate(
+                ['email' => $userData['email']],
+                $userData
+            );
 
             // Log in the user
             Auth::login($user);
+
+            if ($user->wasRecentlyCreated) {
+                Auth::user()->sendEmailVerificationNotification();
+            }
 
             if (Auth::check()) {
                 return true;
