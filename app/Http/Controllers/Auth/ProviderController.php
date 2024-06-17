@@ -47,12 +47,12 @@ class ProviderController extends Controller
             $team = null;
             // Find the user by provider ID or email
             $user = User::where($provider . '_id', $socialUser->id)->orWhere('email', $socialUser->email)->first();
-            $teamId = $user->team_id; // Preserve the current team_id if it exists
+            $teamId = $user->team_id ?? null; // Preserve the current team_id if it exists
 
             // Find the team based on team_code
             if (!empty($team_code)) {
                 $team = Team::where('team_code', $team_code)->first();
-                $teamId = $team->id; // Update teamId if a team is found for the team_code
+                $teamId = $team->id ?? $teamId; // Update teamId if a team is found for the team_code
             }
 
             // Prepare user data to be updated or created
@@ -73,6 +73,7 @@ class ProviderController extends Controller
                 $provider . '_id' => $socialUser->id,
             ], $userData);
 
+            // Log in the user
             Auth::login($user);
 
             if (Auth::check()) {
