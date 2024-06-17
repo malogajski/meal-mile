@@ -39,19 +39,14 @@ class ProviderController extends Controller
 
     public function signOrRegisterWithProvider($socialUser, $provider, $team_code)
     {
-        // Log the socialite user data
-        Log::info('[SOCIALITE ACCESS PAYLOAD][' . $provider . ']: ' . json_encode($socialUser));
-
         try {
-            $team = null;
             // Find the user by provider ID or email
             $user = User::where($provider . '_id', $socialUser->id)->orWhere('email', $socialUser->email)->first();
-            $teamId = $user->team_id ?? null; // Preserve the current team_id if it exists
+            $team = Team::find($user->team_id);
 
             // Find the team based on team_code
             if (!empty($team_code)) {
                 $team = Team::where('team_code', $team_code)->first();
-                $teamId = $team->id ?? $teamId; // Update teamId if a team is found for the team_code
             }
 
             // Prepare user data to be updated or created
@@ -62,30 +57,26 @@ class ProviderController extends Controller
                 $provider . '_refresh_token' => $socialUser->refreshToken ?? null,
             ];
 
-            // Set team_id if team exists and user doesn't have a team_id already
-            if (!is_null($team) && empty($user->team_id)) {
-                $userData['team_id'] = $teamId;
-            }
-
             // Create or update the user
             $user = User::updateOrCreate(
                 ['email' => $userData['email']],
                 $userData
             );
 
-            // Create a new team for the new user
-            if (empty($team)) {
-                $team = Team::create([
-                    'name' => $user->name . "'s Team",
-                ]);
-                $team->members()->attach($user->id, ['approved' => true, 'owner_id' => $user->id]);
-            }
-
             // Log in the user
             Auth::login($user);
 
             if ($user->wasRecentlyCreated) {
                 Auth::user()->sendEmailVerificationNotification();
+            }
+
+            // Set team_id if team exists and user doesn't have a team_id already
+            if (empty($team)) {
+                $team = Team::create([
+                    'name' => $user->name . "'s Team",
+                ]);
+                $team->members()->attach($user->id, ['approved' => true, 'owner_id' => $user->id]);
+                $user->update(['team_id' => $team->id]);
             }
 
             if (Auth::check()) {
