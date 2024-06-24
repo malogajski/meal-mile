@@ -14,10 +14,10 @@ class DashboardController extends Controller
     public function index()
     {
         // Calculate the total number of shopping lists
-        $totalLists = ShoppingList::count();
+        $totalLists = ShoppingList::where('team_id', auth()->user()->team_id)->count();
 
         // Calculate the total number of items across all lists
-        $totalItems = ShoppingListItem::count();
+        $totalItems = Item::where('team_id', auth()->user()->team_id)->count();
 
         // Find the most frequently purchased item
         // This query selects item IDs and counts how many times each appears,
