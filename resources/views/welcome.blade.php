@@ -34,10 +34,12 @@
         <div class="mt-16 dark:text-gray-300">
             <h1 class="text-center text-3xl font-semibold">Welcome to Meal Mile</h1>
             <p class="text-center mt-4">Your ultimate tool for efficient shopping and travel planning. Manage your shopping lists and travel checklists in one place, and get suggestions for recipes based on your pantry items!</p>
-
-            <!-- Additional sections for About, Features etc. if needed -->
         </div>
     </div>
+</div>
+
+<div class="fixed bottom-2 right-2 z-50" style="transform: scale(0.7)">
+    <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="umld" data-color="#BD5FFF" data-emoji="" data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#FFDD00"></script>
 </div>
 </body>
 </html>

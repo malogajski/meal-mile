@@ -49,6 +49,9 @@
             </div>
 
         </div>
+        <div class="flex justify-center my-2" style="transform: scale(0.7)">
+            <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="umld" data-color="#BD5FFF" data-emoji="" data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#FFDD00"></script>
+        </div>
     </div>
 
 </x-app-layout>
