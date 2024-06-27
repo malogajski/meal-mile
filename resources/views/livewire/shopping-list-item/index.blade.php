@@ -6,6 +6,8 @@
                 <div class="flex flex-row space-x-4">
                     @if(isset($row->item->media[0]))
                         <img class="rounded-xl shadow w-16 h-16" src="{{$row->item->media[0]['preview_url']}}" alt="img_{{ $row->item->name }}">
+                    @else
+                        <img class="rounded-xl shadow w-16 h-16" src="{{ asset('assets/no-image.jpg') }}" alt="img_{{ $row->item->name }}">
                     @endif
                     <div>
                         <p>{{ $row->item->name }}</p>

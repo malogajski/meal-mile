@@ -49,9 +49,10 @@ class Create extends Component
                 'name'            => $item->name,
                 'categoryName'    => $item->category ? $item->category->name : '',
                 'subCategoryName' => $item->subCategory ? $item->subCategory->name : '',
+                'media'           => isset($item->media[0]) ? $item->media[0]['preview_url'] : asset('assets/no-image.jpg'),
             ];
         });
-
+//dd($items);
         return view('livewire.shopping-list-item.create', compact('items'))->layout('layouts.app');
     }
 

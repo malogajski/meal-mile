@@ -14,11 +14,7 @@
             </div>
         </div>
 
-
-        <div
-            x-data="itemSelector({{ json_encode($items) }})"
-            class="max-w-xs w-full"
-        >
+        <div x-data="itemSelector({{ json_encode($items) }})" class="w-full">
             <div x-combobox x-model="selected" x-init="selected = ''">
                 <div class="mt-1 relative rounded-md focus-within:ring-2 focus-within:ring-blue-500">
                     <div class="dark:bg-gray-700 flex items-center justify-between gap-2 w-full bg-white pl-5 pr-3 py-2.5 rounded-md shadow">
@@ -26,7 +22,7 @@
                             x-combobox:input
                             :display-value="item => item ? item.name : ''"
                             @input="query = $event.target.value"
-                            class="dark:bg-gray-700 border-none p-0 focus:outline-none focus:ring-0 w-full"
+                            class="dark:bg-gray-700 border-none p-0 focus:outline-none focus:ring-0 w-full text-md"
                             placeholder="Search..."
                             x-ref="searchInput"
                         />
@@ -38,21 +34,14 @@
                     </div>
 
                     <div x-combobox:options x-cloak
-                         class="absolute left-0 max-w-xs w-full max-h-60 mt-2 z-10 origin-top-right overflow-auto bg-white border border-gray-200 rounded-md shadow-md outline-none">
+                         class="absolute left-0 w-full max-h-60 mt-2 z-10 origin-top-right overflow-auto bg-white border border-gray-200 rounded-md shadow-md outline-none">
                         <ul class="divide-y divide-gray-100">
-                            <template
-                                x-for="item in filteredItems"
-                                :key="item.id"
-                            >
-                                <li
-                                    x-combobox:option
-                                    :value="item"
-                                    :class="{
-                                'bg-cyan-500/10 text-gray-900': $comboboxOption.isActive,
-                                'text-gray-600': !$comboboxOption.isActive,
-                            }"
-                                    class="flex items-center cursor-default justify-between gap-2 w-full px-4 py-2 text-sm"
-                                >
+                            <template x-for="item in filteredItems" :key="item.id">
+                                <li x-combobox:option :value="item" :class="{
+                                    'bg-cyan-500/10 text-gray-900': $comboboxOption.isActive,
+                                    'text-gray-600': !$comboboxOption.isActive,
+                                }" class="flex items-center cursor-default justify-between gap-2 w-full px-4 py-2 text-md">
+                                    <img class="rounded-xl shadow w-16 h-16" :src="item.media" alt="img" />
                                     <span x-text="item.name"></span>
                                     <span x-show="$comboboxOption.isSelected" class="text-cyan-600 font-bold">&check;</span>
                                 </li>
