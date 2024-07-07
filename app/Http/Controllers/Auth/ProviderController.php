@@ -42,20 +42,23 @@ class ProviderController extends Controller
         try {
             // Find the user by provider ID or email
             $user = User::where($provider . '_id', $socialUser->id)->orWhere('email', $socialUser->email)->first();
-            $team = Team::find($user->team_id);
 
-            // Find the team based on team_code
-            if (!empty($team_code)) {
-                $team = Team::where('team_code', $team_code)->first();
+            if (!empty($user)) {
+                $team = Team::find($user->team_id);
+
+                // Find the team based on team_code
+                if (!empty($team_code)) {
+                    $team = Team::where('team_code', $team_code)->first();
+                }
+
+                // Prepare user data to be updated or created
+                $userData = [
+                    'name'                       => $socialUser->name,
+                    'email'                      => $socialUser->email,
+                    $provider . '_token'         => $socialUser->token,
+                    $provider . '_refresh_token' => $socialUser->refreshToken ?? null,
+                ];
             }
-
-            // Prepare user data to be updated or created
-            $userData = [
-                'name'                       => $socialUser->name,
-                'email'                      => $socialUser->email,
-                $provider . '_token'         => $socialUser->token,
-                $provider . '_refresh_token' => $socialUser->refreshToken ?? null,
-            ];
 
             // Create or update the user
             $user = User::updateOrCreate(
