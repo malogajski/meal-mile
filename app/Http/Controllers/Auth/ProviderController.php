@@ -50,15 +50,15 @@ class ProviderController extends Controller
                 if (!empty($team_code)) {
                     $team = Team::where('team_code', $team_code)->first();
                 }
-
-                // Prepare user data to be updated or created
-                $userData = [
-                    'name'                       => $socialUser->name,
-                    'email'                      => $socialUser->email,
-                    $provider . '_token'         => $socialUser->token,
-                    $provider . '_refresh_token' => $socialUser->refreshToken ?? null,
-                ];
             }
+
+            // Prepare user data to be updated or created
+            $userData = [
+                'name'                       => $socialUser->name,
+                'email'                      => $socialUser->email,
+                $provider . '_token'         => $socialUser->token,
+                $provider . '_refresh_token' => $socialUser->refreshToken ?? null,
+            ];
 
             // Create or update the user
             $user = User::updateOrCreate(
