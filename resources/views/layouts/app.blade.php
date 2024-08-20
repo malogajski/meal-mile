@@ -33,6 +33,7 @@
         {{ $slot }}
     </main>
 </div>
+@livewire('components.notification')
 @livewire('livewire-ui-modal')
 </body>
 </html>

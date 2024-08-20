@@ -27,5 +27,6 @@
                 {{ $slot }}
             </div>
         </div>
+        @livewire('components.notification')
     </body>
 </html>
