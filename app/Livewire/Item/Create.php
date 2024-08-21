@@ -136,6 +136,7 @@ class Create extends ModalComponent
         }
 
         $this->dispatch('refreshCreateItem');
+        $this->dispatch('refreshShippingList');
         $this->closeModal();
     }
 

@@ -50,49 +50,6 @@ class Index extends Component
             Log::error('Shopping list - remove item error: ' . $e->getMessage());
         }
     }
-
-    public function cancel($id)
-    {
-        dd('cancel');
-        try {
-            DB::beginTransaction();
-            ShoppingListItem::where('shopping_list_id', $this->shoppingListId)
-                ->where('item_id', $id)
-                ->update([
-                    'is_purchased'         => 0,
-                    'purchased_by_user_id' => null,
-                ]);
-            $this->dispatch('alertSuccess', ['title' => __('Success'), 'message' => __('Item has been canceled.')]);
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();
-            $this->dispatch('alertError', ['title' => __('Error'), 'message' => __('Something went wrong while canceling item.')]);
-            Log::error('Shopping list - cancel purchase item error: ' . $e->getMessage());
-        }
-    }
-
-    public function purchased($id)
-    {
-        dd('purchased');
-        try {
-            DB::beginTransaction();
-            $shoppingListItem = ShoppingListItem::where('shopping_list_id', $this->shoppingListId)
-                ->where('item_id', $id)->first();
-
-            if (!empty($shoppingListItem)) {
-                $shoppingListItem->update([
-                    'is_purchased'         => 1,
-                    'purchased_by_user_id' => auth()->user()->id,
-                ]);
-            }
-            DB::commit();
-            $this->dispatch('alertSuccess', ['title' => __('Success'), 'message' => __('Item purchased successfully.')]);
-        } catch (\Exception $e) {
-            DB::rollBack();
-            $this->dispatch('alertError', ['title' => __('Error'), 'message' => __('Something went wrong while purchasing.')]);
-            Log::error('Shopping list - purchase item error: ' . $e->getMessage());
-        }
-    }
     public function togglePurchased($id)
     {
         $shoppingListItem = ShoppingListItem::where('shopping_list_id', $this->shoppingListId)
