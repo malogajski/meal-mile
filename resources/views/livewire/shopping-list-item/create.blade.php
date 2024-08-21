@@ -1,10 +1,15 @@
 <div x-data="{ showItems: false }" class="p-2">
     <div class="mt-3 p-6 bg-white text-gray-700 dark:text-gray-300 rounded-md shadow-xl dark:bg-gray-800">
         <!-- Back Button at the top -->
-        <div class="mb-3">
+        <div class="mb-3 flex items-center space-x-3">
             <x-secondary-button onclick="history.back()" class="w-full flex justify-center">
-                <i class="fa fa-arrow-alt-circle-left mr-1"></i> Back
+                <i class="fa fa-arrow-alt-circle-left text-lg mr-1"></i> Back
             </x-secondary-button>
+
+            <x-primary-button wire:click="$dispatch('openModal', {component: 'item.create'})" class="w-full flex justify-center">
+                <i class="fa fa-plus-circle text-lg mr-1"></i>
+                {{ __('Create Item') }}
+            </x-primary-button>
         </div>
 
         <div class="flex justify-between items-center mb-4">
@@ -17,7 +22,7 @@
         <div x-data="itemSelector({{ json_encode($items) }})" class="w-full">
             <div x-combobox x-model="selected" x-init="selected = ''">
                 <div class="mt-1 relative rounded-md focus-within:ring-2 focus-within:ring-blue-500">
-                    <div class="dark:bg-gray-700 flex items-center justify-between gap-2 w-full bg-white pl-5 pr-3 py-2.5 rounded-md shadow">
+                    <div class="dark:bg-gray-700  ring-2 dark:ring-purple-700 ring-gray-300 flex items-center justify-between gap-2 w-full bg-white pl-5 pr-3 py-2.5 rounded-md shadow">
                         <input
                             x-combobox:input
                             :display-value="item => item ? item.name : ''"

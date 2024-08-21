@@ -8,8 +8,8 @@
     </p>
     <div class="w-full mt-2 mb-4 text-gray-700 dark:text-gray-300">
         <form enctype="multipart/form-data" wire:submit.prevent="save" class="mt-6">
-            <div class="flex flex-col space-y-2 mb-6">
-                <div class="flex flex-col space-y-2 rounded p-2 bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300">
+            <div class="flex flex-col space-y-2 mb-2">
+                <div class="flex flex-col rounded p-2 bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300">
                     <label for="name" class="text-xs uppercase font-bold">Name</label>
                     <div class="flex items-center space-x-2">
                         <input type="text" class="text-input rounded w-full" id="name" wire:model="name">
@@ -17,17 +17,17 @@
                     <div>@error('name') {{ $message }} @enderror</div>
                 </div>
 
-                <div class="flex flex-col space-y-2 rounded p-2 bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300">
+                <div class="flex flex-col rounded p-3 bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300">
                     <x-toggle :wire-model="'shoppingList'" :title="'Use for shopping'" id="shoppingList" :use-defer="true"/>
                     @error('shoppingList') <div>{{ $message }}</div>@enderror
                 </div>
 
-                <div class="flex flex-col space-y-2 rounded p-2 bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300">
+                <div class="flex flex-col rounded p-3 bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300">
                     <x-toggle :wire-model="'checkList'" :title="'Use for check list'" id="checkList" :use-defer="true"/>
                     @error('checkList') <div>{{ $message }} @enderror</div>
                 </div>
 
-                <div class="flex flex-col space-y-2 rounded p-2 bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300">
+                <div class="flex flex-col rounded p-2 mb-2 bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300">
                     <label for="category_id" class="text-xs uppercase font-bold">Category</label>
                     <div class="flex items-center flex-row space-x-2">
                         <select name="category_id" id="category_id" wire:model.live="categoryId" class="select w-full">
@@ -41,7 +41,7 @@
                     <div>@error('categoryId') {{ $message }} @enderror</div>
                 </div>
 
-                <div class="flex flex-col space-y-2 rounded p-2 bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300">
+                <div class="flex flex-col rounded p-2 bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300">
                     <label for="sub_category_id" class="text-xs uppercase font-bold">Sub category</label>
                     <div class="flex items-center flex-row space-x-2">
                         <select name="sub_category_id" id="sub_category_id" wire:model="subCategoryId" class="select w-full">
@@ -75,10 +75,10 @@
                     <canvas x-show="drawing" :width="canvasWidth" :height="canvasHeight" class="absolute top-0 left-0 object-contain w-full h-full" x-ref="canvas" style="border: 1px solid black;"></canvas>
                 </div>
 
-                <div class="mt-6">
-                    <button type="button" @click="startDrawing()">Start Drawing</button>
-                    <button type="button" @click="saveImage()">Save Image</button>
-                </div>
+{{--                <div class="mt-6">--}}
+{{--                    <button type="button" @click="startDrawing()">Start Drawing</button>--}}
+{{--                    <button type="button" @click="saveImage()">Save Image</button>--}}
+{{--                </div>--}}
             </div>
 
             <div class="flex items-center justify-between mt-6">
