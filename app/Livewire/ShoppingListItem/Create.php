@@ -19,6 +19,7 @@ class Create extends Component
 
     protected $listeners = [
         'refreshShoppingItemCreate' => 'check',
+        'itemAdded' => 'add'
     ];
 
     public function check()
@@ -52,7 +53,7 @@ class Create extends Component
                 'media'           => isset($item->media[0]) ? $item->media[0]['preview_url'] : asset('assets/no-image.jpg'),
             ];
         });
-//dd($items);
+
         return view('livewire.shopping-list-item.create', compact('items'))->layout('layouts.app');
     }
 
