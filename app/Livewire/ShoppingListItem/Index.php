@@ -39,7 +39,7 @@ class Index extends Component
             $shoppingListItem = ShoppingListItem::where('shopping_list_id', $this->shoppingListId)
                 ->where('item_id', $id)->first();
 
-            $shoppingListItem->delete($id);
+            $shoppingListItem->delete();
             $this->dispatch('refreshShoppingItemCreate');
             $this->dispatch('$refresh');
             DB::commit();

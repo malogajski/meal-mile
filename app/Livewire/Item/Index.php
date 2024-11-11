@@ -19,7 +19,6 @@ class Index extends Component
 
     public function refreshCreateItem()
     {
-        $this->getLists();
         $this->dispatch('$refresh');
     }
 

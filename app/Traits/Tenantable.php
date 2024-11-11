@@ -6,8 +6,13 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int|null $team_id
+ */
 trait Tenantable
 {
+    protected int $team_id;
+
     public static function bootTenantable()
     {
         if (app()->runningInConsole()) {
@@ -31,6 +36,7 @@ trait Tenantable
             $teamId = auth()->user()->team_id;
 
             if ($teamId) {
+                // @phpstan-ignore-next-line
                 $query->where((new static())->getTable() . '.team_id', $teamId);
             }
         });

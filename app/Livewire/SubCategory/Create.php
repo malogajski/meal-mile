@@ -66,7 +66,7 @@ class Create extends ModalComponent
             'created_at' => Carbon::now(),
         ];
 
-        $ifCategoryExists = SubCategory::where('team_id', auth()->user()->tema_id)
+        $ifCategoryExists = SubCategory::where('team_id', auth()->user()->team_id)
             ->where('name', $this->name)
             ->where('name', $this->categoryId)
             ->exists();

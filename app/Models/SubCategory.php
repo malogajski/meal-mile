@@ -13,7 +13,7 @@ class SubCategory extends Model
 
     protected $guarded = [];
 
-    public function category()
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Category::class);
     }

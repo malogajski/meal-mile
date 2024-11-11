@@ -34,7 +34,6 @@ class Create extends ModalComponent
 
         // parsing 'parameters'
         if (!empty($parameters)) {
-            $this->isEdit = true;
             foreach ($parameters as $key => $value) {
                 if ($key === 'id') {
                     $this->categoryId = $value;
